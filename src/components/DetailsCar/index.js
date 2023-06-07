@@ -5,7 +5,10 @@ export default function DetailsCar (){
   
 return (
   <Wrapper>
+    <p>
+    Hello World
 
+    </p>
   </Wrapper>
 )
 }

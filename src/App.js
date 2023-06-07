@@ -5,6 +5,7 @@ import Accueil from "./components/Accueil";
 import Achat from "./components/Achat";
 import Contact from "./components/Contact";
 import Connexion from './components/Connexion';
+import DetailsCar from './components/DetailsCar';
 
 
 
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route element={<Connexion/>} path='/connexion'/>
           <Route element={<Contact/>} path='/contact'/>
+          <Route element={<DetailsCar/>} path='/achat/details'/>
           <Route element={<Achat/>} path='/achat'/>
           <Route element={<Accueil/>} path='/'/>
         </Routes>
