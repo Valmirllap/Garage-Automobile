@@ -12,7 +12,7 @@ export default function Header({handleToogleTheme, isLight, label}) {
     <Wrapper>
       <DivFlex className="flex">
       <Link to="/"><Image src={Logo}/></Link>
-      <button onClick={handleToogleTheme}>Mode</button>
+      <button onClick={handleToogleTheme}>Mode {isLight ? "Dark" : "Light"}</button>
       </DivFlex>
       <nav>
         <Link to="/">
@@ -24,7 +24,7 @@ export default function Header({handleToogleTheme, isLight, label}) {
         <Link to="/contactez-nous">
           <MenuEl isCurrentPage={location.pathname === "/contactez-nous"}>Contactez-nous</MenuEl>
         </Link>
-        <Link to="/Connexion">
+        <Link to="/connexion">
           <Connexion>Connexion</Connexion>
         </Link>
       </nav>

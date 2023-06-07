@@ -1,0 +1,30 @@
+div.bg-image-revision{
+  background-image: url(../../Images/revision.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+div.bg-image-kit{
+  background-image: url(../../Images/kit-de-distribution.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+div.bg-image-brakes{
+  background-image: url(../../Images/brakes.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+div.bg-image-clutch{
+  background-image: url(../../Images/clutch.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+div.bg-image-Ac{
+  background-image: url(../../Images/AC.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
