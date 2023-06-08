@@ -27,12 +27,14 @@ export default function Layout({children}){
   )
 }
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+overflow-x: hidden;
+`;
 
 const Main = styled.div`
 min-height: calc(100vh - 160px);
 width: 100%;
-max-width: 1440px;
+max-width: 1920px;
 border: solid 1px;
 margin: auto;
 display: flex;
