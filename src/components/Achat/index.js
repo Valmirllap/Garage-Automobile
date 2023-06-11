@@ -6,7 +6,7 @@ import MainTitle from "../hook/MainTitle";
 export default function Achat (){
 return (
   <Wrapper>
-    <MainTitle/>
+    <MainTitle text="Vendeur voiture d'occasion"/>
     <FilterComponent/>
     <Cars/>
   </Wrapper>

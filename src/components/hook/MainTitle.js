@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export default function MainTitle() {
+export default function MainTitle({text}) {
   return (
     <TitleContainer>
-      <Title>Vendeur voiture d'occasion</Title>
+      <Title>{text}</Title>
     </TitleContainer>
   );
 };
