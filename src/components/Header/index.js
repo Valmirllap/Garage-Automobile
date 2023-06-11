@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Logo from "../../Images/logo.png";
 import {Link, useLocation} from "react-router-dom";
-
+import MaterialUISwitch from "./Switch";
 
 
 export default function Header({handleToogleTheme, isLight, label}) {
@@ -12,7 +12,7 @@ export default function Header({handleToogleTheme, isLight, label}) {
     <Wrapper>
       <DivFlex className="flex">
       <Link to="/"><Image src={Logo}/></Link>
-      <button onClick={handleToogleTheme}>Mode {isLight ? "Dark" : "Light"}</button>
+      <MaterialUISwitch onClick={handleToogleTheme}>Mode {isLight ? "Dark" : "Light"}</MaterialUISwitch>
       </DivFlex>
       <nav>
         <Link to="/">

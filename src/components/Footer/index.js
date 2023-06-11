@@ -1,43 +1,50 @@
 import styled from "styled-components";
+import { FaFacebookSquare } from "react-icons/fa";
+import { FaInstagramSquare } from "react-icons/fa";
+import { FaTwitterSquare } from "react-icons/fa"
 import { Link } from "react-router-dom";
 
 export default function Footer() {
   const data = [
     {
-      id: 1, 
-      location: "Localisation 1: 89 av. de l'Astronaute Bondy, FR 93140", 
-      menu: "Accueil", 
-      link: "/", 
-      contact: "Tél.: +33 123456789", 
+      id: 1,
+      location: "Localisation 1: 89 av. de l'Astronaute Bondy, FR 93140",
+      menu: "Accueil",
+      link: "/",
+      contact: "Tél.: +33 123456789",
       openingTime: "lun.: 08:45 - 12:00, 14:00 - 18:00"
     },
     {
-      id: 2, 
-      location: "Localisation 2: 17 rue M. A. gardient Allek, FR 90070", 
-      menu: "Achat", 
-      link: "/achat", 
-      contact: "Email: Example@gmail.com", 
+      id: 2,
+      location: "Localisation 2: 17 rue M. A. gardient Allek, FR 90070",
+      menu: "Achat",
+      link: "/achat",
+      contact: "Email: Example@gmail.com",
       openingTime: "mar.: 08:45 - 12:00, 14:00 - 18:00"
     },
     {
-      id: 3, 
-      location: "Localisation 3: 48 Place de la Gare Colomiers, FR 31770", 
-      menu: "Contactez-nous", 
-      link: "/contactez-nous", 
-      contact: "Réseau sociaux:", 
+      id: 3,
+      location: "Localisation 3: 48 Place de la Gare Colomiers, FR 31770",
+      menu: "Contactez-nous",
+      link: "/contactez-nous",
+      contact: "Réseau sociaux:",
       openingTime: "mer.: 08:45 - 12:00, 14:00 - 18:00"
     },
     {
-      id: 4, 
-      location: "Localisation 4: 56 Place de la République, FR 31560", 
-      menu: "Connexion", 
-      link: "/connexion", 
-      contact: " instagram - facebook - twitter", 
+      id: 4,
+      location: "Localisation 4: 56 Place de la République, FR 31560",
+      menu: "Connexion",
+      link: "/connexion",
+      contact: [
+        <Link to="https://www.facebook.com"><FaFacebookSquare className="social-logo" /></Link>,
+        <Link to="https://www.instagram.com"><FaInstagramSquare className="social-logo" /></Link>,
+        <Link to="https://www.twitter.com"><FaTwitterSquare className="social-logo" /></Link>
+      ],
       openingTime: "jeu.: 08:45 - 12:00, 14:00 - 18:00"
     },
-    {id: 5, openingTime: "ven.: 08:45 - 12:00, 14:00 - 18:00" },
-    {id: 6, openingTime: "sam.: 08:45 - 12:00" },
-    {id: 7, openingTime: "dim.: Fermé" },
+    { id: 5, openingTime: "ven.: 08:45 - 12:00, 14:00 - 18:00" },
+    { id: 6, openingTime: "sam.: 08:45 - 12:00" },
+    { id: 7, openingTime: "dim.: Fermé" },
   ];
   return (
     <Wrapper>
@@ -52,8 +59,8 @@ export default function Footer() {
           return (
             <tr key={value.id}>
               <td>{value.location}</td>
-              <td><Link to={value.link}>{value.menu}</Link></td>
-              <td>{value.contact}{value.media}</td>
+              <td><Link className="menu" to={value.link}>{value.menu}</Link></td>
+              <td>{value.contact}</td>
               <td>{value.openingTime}</td>
             </tr>
           )
@@ -106,19 +113,22 @@ color: #CFDBD5;
 & a{
   text-decoration: none;
   color: #CFDBD5;
-  &:hover{
-    transition: linear 0.2s;
-    font-size: 20px;
-    border-bottom: 1px solid #CFDBD5;
-    @media screen and (max-width: 998px){
-      font-size: 18px;
-    }
-    @media screen and (max-width: 768px){
-      font-size: 16px;
-    }
-    @media screen and (max-width: 576px){
-      font-size: 14px;
-    }
-  }
 }
+& .menu{
+  &:hover{
+      transition: linear 0.2s;
+      font-size: 20px;
+      border-bottom: 1px solid #CFDBD5;
+      @media screen and (max-width: 998px){
+        font-size: 18px;
+      }
+      @media screen and (max-width: 768px){
+        font-size: 16px;
+      }
+      @media screen and (max-width: 576px){
+        font-size: 14px;
+      }
+    }
+}
+  
 `;

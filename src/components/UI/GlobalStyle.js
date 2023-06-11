@@ -5,7 +5,22 @@ body{
   transition: linear 0.25s;
   background-color: ${(props) => props.theme.backgroundColor};
   color: ${(props) => props.theme.mainColor}
-  
+}
+
+/* SOCIAL MEDIA LOGO */
+
+& .social-logo{
+  font-size: 25px;
+  margin-right: 30px;
+  margin-top: -15px;
+  @media screen and (max-width: 998px){
+    font-size: 22px;
+    margin-right: 15px;
+  }
+  @media screen and (max-width: 998px){
+    font-size: 20px;
+    margin-right: 7px;
+  }
 }
 
 /* DetailCar component Class and Tag*/
