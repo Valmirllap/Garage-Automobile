@@ -73,6 +73,7 @@ padding: 7px;
 margin-top: -10px;
 color: #333533;
 border: none;
+border-radius: 7px;
 cursor: pointer;
 `;
 

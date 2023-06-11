@@ -48,7 +48,7 @@ const filters = [
         </Displayfilters>
     </Filters>
    );
-      })};
+      })}
     </div>
   );
 };

@@ -50,7 +50,6 @@ color: #CFDBD5;
   font-size: 20px;
   text-decoration: underline;
   text-align: left;
-  border-bottom: 1px solid #CFDBD5;
 }
 & a{
   text-decoration: none;

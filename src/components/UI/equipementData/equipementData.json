@@ -1,0 +1,93 @@
+{
+  "equipmentCar":[
+    {
+      "id": "mercedes",
+      "contentLi": [
+        {"id": "1", "li": "ABS"},
+        {"id": "2", "li": "Airbag conducteur"},
+        {"id": "3", "li": "Airbag latéraux"},
+        {"id": "4", "li": "Alerte de franchissement involontaire de lignes"},
+        {"id": "5", "li": "Anti-patinage"},
+        {"id": "6", "li": "Assistant au freinage d'urgence"},
+        {"id": "7", "li": "Bluetooth"},
+        {"id": "8", "li": "Capteurs d'aide au stationnement arrière"},
+        {"id": "9", "li": "Climatisation"},
+        {"id": "10", "li": "Direction assistée"},
+        {"id": "11", "li": "Détecteur de lumière"},
+        {"id": "12", "li": "Détection des panneaux routiers"},
+        {"id": "13", "li": "Ecran tactile"},
+        {"id": "14", "li": "Isofix"},
+        {"id": "15", "li": "LED Phare de jour"},
+        {"id": "16", "li": "Phares au LED"},
+        {"id": "17", "li": "Radio"}
+      ]
+    },
+    {
+      "id": "fiat",
+      "contentLi": [
+        {"id": "1", "li": "ABS"},
+        {"id": "2", "li": "Airbag passager"},
+        {"id": "3", "li": "Anti-patinage"},
+        {"id": "4", "li": "Bluetooth"},
+        {"id": "5", "li": "Climatisation"},
+        {"id": "6", "li": "Commande vocale"},
+        {"id": "7", "li": "Détection des panneaux routiers"},
+        {"id": "8", "li": "Ecran tactile"},
+        {"id": "9", "li": "LED Phare de jour"},
+        {"id": "10", "li": "Phares de jour"},
+        {"id": "11", "li": "Régulateur de vitesse"},
+        {"id": "12", "li": "Siège à réglage lombaire"},
+        {"id": "13", "li": "Toit ouvrant"},
+        {"id": "14", "li": "Verrouillage centralisé"},
+        {"id": "15", "li": "Volant multifonctions"}
+      ]
+    },
+    {
+      "id": "toyota",
+      "contentLi": [
+        {"id": "1", "li": "ABS"},
+        {"id": "2", "li": "Airbag conducteur"},
+        {"id": "3", "li": "Airbags latéraux"},
+        {"id": "4", "li": "Android Auto"},
+        {"id": "5", "li": "Apple CarPlay"},
+        {"id": "6", "li": "Assistant de démarrage en côte"},
+        {"id": "7", "li": "Caméra d'aide au stationnement"},
+        {"id": "8", "li": "Capteurs d'aide au stationnement avant"},
+        {"id": "9", "li": "Direction assistée"},
+        {"id": "10", "li": "Détecteur de lumière"},
+        {"id": "11", "li": "Détection des panneaux routiers"},
+        {"id": "12", "li": "Ecran tactile"},
+        {"id": "13", "li": "Isofix"},
+        {"id": "14", "li": "LED Phare de jour"},
+        {"id": "15", "li": "Pack Sport"},
+        {"id": "16", "li": "Radio"},
+        {"id": "17", "li": "Régulateur de vitesse"}
+      ]
+    },
+    {
+      "id": "audi",
+      "contentLi": [
+        {"id": "1", "li": "ABS"},
+        {"id": "2", "li": "Airbag conducteur"},
+        {"id": "3", "li": "Airbags latéraux"},
+        {"id": "4", "li": "Alerte de franchissement involontaire de lignes"},
+        {"id": "5", "li": "Anti-patinage"},
+        {"id": "6", "li": "Assistant au freinage d'urgence"},
+        {"id": "7", "li": "Bluetooth"},
+        {"id": "8", "li": "Capteurs d'aide au stationnement arrière"},
+        {"id": "9", "li": "Climatisation"},
+        {"id": "10", "li": "Direction assistée"},
+        {"id": "11", "li": "Détecteur de lumière"},
+        {"id": "12", "li": "Détection des panneaux routiers"},
+        {"id": "13", "li": "Ecran tactile"},
+        {"id": "14", "li": "Isofix"},
+        {"id": "15", "li": "LED Phare de jour"},
+        {"id": "16", "li": "Phares au LED"},
+        {"id": "17", "li": "Radio"},
+        {"id": "18", "li": "Régulateur de vitesse"},
+        {"id": "19", "li": "Siège à réglage lombaire"},
+        {"id": "20", "li": "Sièges sport"}
+      ]
+    }
+  ]
+}
