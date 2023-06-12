@@ -1,33 +1,48 @@
 import styled from "styled-components";
 import Logo from "../../Images/logo.png";
-import {Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import MaterialUISwitch from "./Switch";
+import {GiHamburgerMenu} from "react-icons/gi";
+import {AiOutlineClose} from "react-icons/ai";
+import { useRef } from "react";
+import { useState } from "react";
 
 
-export default function Header({handleToogleTheme, isLight, label}) {
-  
+export default function Header({ handleToogleTheme, isLight}) {
+
   const location = useLocation();
+  const [isNavVisible, setIsNavVisible] = useState(false);
+  const navRef = useRef(null);
+
+  const showNavBar = () => {
+    setIsNavVisible(true);
+  }
+  const hideNavBar = () => {
+    setIsNavVisible(false);
+  }
 
   return (
     <Wrapper>
       <DivFlex className="flex">
-      <Link to="/"><Image src={Logo}/></Link>
-      <MaterialUISwitch onClick={handleToogleTheme}>Mode {isLight ? "Dark" : "Light"}</MaterialUISwitch>
+        <Link to="/"><Image src={Logo} /></Link>
+        <MaterialUISwitch onClick={handleToogleTheme}>{isLight ? "Dark" : "Light"}</MaterialUISwitch>
       </DivFlex>
-      <nav>
-        <Link to="/">
+      <nav ref={navRef} className={isNavVisible ? "responsive_nav" : ""}>
+        <Link onClick={hideNavBar} to="/" >
           <MenuEl isCurrentPage={location.pathname === "/"}>Accueil</MenuEl>
         </Link>
-        <Link to="/achat">
+        <Link onClick={hideNavBar} to="/achat" >
           <MenuEl isCurrentPage={location.pathname === "/achat"}>Achat</MenuEl>
         </Link>
-        <Link to="/contactez-nous">
+        <Link onClick={hideNavBar} to="/contactez-nous">
           <MenuEl isCurrentPage={location.pathname === "/contactez-nous"}>Contactez-nous</MenuEl>
         </Link>
-        <Link to="/connexion">
+        <Link onClick={hideNavBar} to="/connexion">
           <Connexion>Connexion</Connexion>
         </Link>
+        <button className="nav-btn nav-close-btn" onClick={hideNavBar}><AiOutlineClose className="icons"/></button>
       </nav>
+      <button className="nav-btn" onClick={showNavBar}><GiHamburgerMenu className="icons"/></button>
     </Wrapper>
   )
 }
@@ -47,12 +62,53 @@ background-color: #242425;
   display: flex;
   flex-direction: row;
 }
+& .nav-btn {
+  padding: 5px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #F1F6F9;
+  display: none;
+}
+& .icons{
+  font-size: 30px;
+  color: #CFDBD5;
+}
+@media (max-width: 768px) {
+  & .nav-btn {
+    display: flex;
+  }
+  & nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-left: 60%;
+    height: 100%;
+    width: 45%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    background-color: #242425;
+    transform: translateY(-100vh); 
+  }
+  & .responsive_nav {
+    transform: none;
+  }
+  & nav .nav-close-btn{
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  }
+}
 `;
+
 const DivFlex = styled.div`
 display: flex;
 align-items: center;
 `;
-
 const MenuEl = styled.p`
 font-size: 18px;
 font-family: Barlow;
@@ -63,7 +119,6 @@ border-bottom: solid 2px ${(props) => props.isCurrentPage ? "" : "trasparent"};
   border-bottom: solid 2px;
 }
 `;
-
 const Connexion = styled.button`
 font-family: Barlow;
 font-weight: 600;
@@ -76,8 +131,6 @@ border: none;
 border-radius: 7px;
 cursor: pointer;
 `;
-
-
 const Image = styled.img`
   padding: 10px;
   height: 80px;

@@ -57,7 +57,7 @@ const filters = [
 const Filters = styled.div`
 margin: 20px 0 0 20px;
 & .range-slider{
-  width: 320px;
+  width: 270px;
   margin: 20px 0 0 20px;
   color: ${(props) => props.theme.mainColor};
   @media screen and (max-width: 576px){
@@ -78,7 +78,7 @@ font-family: barlow;
 const Displayfilters = styled.div`
 display: flex;
 justify-content: space-between;
-width: 350px;
+width: 300px;
 @media screen and (max-width: 576px){
   font-size: 16px;
   width: 230px;
