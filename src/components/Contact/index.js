@@ -12,4 +12,6 @@ export default function Contact() {
   )
 }
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+`;
+

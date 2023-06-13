@@ -1,13 +1,16 @@
 import styled from "styled-components";
+import MainTitle from "../hook/MainTitle";
+import Connexion from "./Connexion";
 
+export default function ConnexionForm() {
 
-export default function Connexion (){
-  
-return (
-  <Wrapper>
-
-  </Wrapper>
-)
+  return (
+    <Wrapper>
+      <MainTitle text="Connexion" />
+      <Connexion/>
+    </Wrapper>
+  )
 }
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+`;

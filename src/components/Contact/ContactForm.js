@@ -17,48 +17,61 @@ export default function ContactForm() {
     );
   };
   return (
-    <Form onSubmit={handleSubmit}>
-      <Label htmlFor="lastname">Nom</Label>
-      <Input className="container-input" id="lastname" type="lastname" name="lastname" required />
-      <ValidationError prefix="Lastname" field="lastname" errors={state.errors} />
+    <ContainerForm>
+      <ContainerInfoForm>
+        <Form onSubmit={handleSubmit}>
+          <Label htmlFor="lastname">Nom</Label>
+          <Input className="container-input" id="lastname" type="lastname" name="lastname" required />
+          <ValidationError prefix="Lastname" field="lastname" errors={state.errors} />
 
-      <Label htmlFor="firstname">Prénom</Label>
-      <Input className="container-input" id="firstname" type="firstname" name="firstname" required />
-      <ValidationError prefix="Firstname" field="firstname" errors={state.errors} />
+          <Label htmlFor="firstname">Prénom</Label>
+          <Input className="container-input" id="firstname" type="firstname" name="firstname" required />
+          <ValidationError prefix="Firstname" field="firstname" errors={state.errors} />
 
-      <Label htmlFor="email">E-mail</Label>
-      <Input className="container-input" id="email" type="email" name="email" required />
-      <ValidationError prefix="Email" field="email" errors={state.errors} />
+          <Label htmlFor="email">E-mail</Label>
+          <Input className="container-input" id="email" type="email" name="email" required />
+          <ValidationError prefix="Email" field="email" errors={state.errors} />
 
-      <Label htmlFor="phone">Téléphone</Label>
-      <Input className="container-input" id="phone" type="tel" name="phone" pattern="\+?\d{2,3}-\d{2,3}/\d{2}\d{2}\d{2}" placeholder="+xx-xxx/xx-xx-xx" required />
-      <ValidationError prefix="phone" field="phone" errors={state.errors} />
+          <Label htmlFor="phone">Téléphone</Label>
+          <Input className="container-input" id="phone" type="tel" name="phone" pattern="\+?\d{2,3}-\d{2,3}/\d{2}\d{2}\d{2}" placeholder="+xx-xxx/xx-xx-xx" required />
+          <ValidationError prefix="phone" field="phone" errors={state.errors} />
 
-      <Label htmlFor="message">Message</Label>
-      <Message className="container-input" id="message" name="message" required />
-      <ValidationError prefix="Message" field="message" errors={state.errors} />
+          <Label htmlFor="message">Message</Label>
+          <Message className="container-input" id="message" name="message" required />
+          <ValidationError prefix="Message" field="message" errors={state.errors} />
 
-      <SubmitButton type="submit" disabled={state.submitting}>Envoyer</SubmitButton>
-    </Form>
+          <SubmitButton type="submit" disabled={state.submitting}>Envoyer</SubmitButton>
+        </Form>
+      </ContainerInfoForm>
+    </ContainerForm>
   )
 }
 
-
-const Form = styled.form`
+const ContainerForm = styled.div`
 display: flex;
 align-items: center;
 justify-content: center;
-flex-direction: column;
+width: 100%;
+height: 500px;
 & .container-input{
-  width: 50%;
   background-color: ${(props) => props.theme.card};
-  font-family: barlow;
   border: 1px solid ${(props) => props.theme.mainColor};
+  font-family: barlow;
   font-size: 20px;
 }
 `;
+
+const ContainerInfoForm = styled.div`
+width: 50%;
+`;
+
+const Form = styled.form`
+display: flex;
+flex-direction: column;
+
+`;
 const Label = styled.label`
-margin-top: 25px;
+margin-top: 15px;
 font-family: Libre baskerville;
 font-weight: 600;
 font-size: 18px;
@@ -86,7 +99,6 @@ cursor: pointer;
 `;
 
 // THANK MESSAGE TO THE USER \\
-
 const ValidForm = styled.div`
 display: flex;
 align-items: center;
