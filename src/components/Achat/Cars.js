@@ -19,6 +19,7 @@ const caracteristicsCar = [
     miles: '177986',
     price: '45768',
     link: '/achat/details/mercedes', // this path we can find it in the app component and the id = mercedes
+    picsLink: "/achat/pics/mercedes",
   },
   {
     id: 2, 
@@ -30,6 +31,7 @@ const caracteristicsCar = [
     miles: '145676',
     price: '6899',
     link: '/achat/details/fiat',
+    picsLink: "/achat/pics/fiat",
   },
   {
     id: 3, 
@@ -40,7 +42,8 @@ const caracteristicsCar = [
     gas: 'Hybride',
     miles: '17236',
     price: '23544',
-    link: '/achat/details/toyota', 
+    link: '/achat/details/toyota',
+    picsLink: "/achat/pics/toyota",
   },
   {
     id: 4, 
@@ -52,6 +55,7 @@ const caracteristicsCar = [
     miles: '100776 km',
     price: '34067',
     link: '/achat/details/audi',
+    picsLink: "/achat/pics/audi",
   },
 ]
 
@@ -61,7 +65,7 @@ const caracteristicsCar = [
       return (
         <Wrapper key={value.id}>
         <Card>
-          <CardImage src={value.image} alt={value.car}/>
+          <Link to={value.picsLink}><CardImage src={value.image} alt={value.car}/></Link>
           <Content>
             <Title>{value.title}</Title>
             <ul>
