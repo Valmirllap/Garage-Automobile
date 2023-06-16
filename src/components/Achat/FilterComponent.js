@@ -6,7 +6,7 @@ export default function FilterComponent () {
 
   const useFilter = (initialValue, minValue, maxValue) => {
     const [filterValue, setFilterValue] = useState(initialValue);
-  
+
     const handleChange = (event, newValue) => {
       setFilterValue(newValue);
     };
