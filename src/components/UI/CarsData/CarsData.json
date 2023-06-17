@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "image": "imagesJson/mercedes.jpg",
+    "car": "Voiture Mercedes",
+    "title": "Mercedes GLA 200 - AMG d Line 150 CH - Diesel",
+    "year": 2020,
+    "gas": "Diesel",
+    "miles": 177986,
+    "price": 45768,
+    "link": "/achat/details/mercedes",
+    "picsLink": "/achat/pics/mercedes"
+  },
+  {
+    "id": 2,
+    "image": "imagesJson/fiat.jpg",
+    "car": "Voiture Fiat",
+    "title": "Fiat 1.2i Lounge 69 CH - Essence",
+    "year": 2009,
+    "gas": "Essence",
+    "miles": 145676,
+    "price": 6899,
+    "link": "/achat/details/fiat",
+    "picsLink": "/achat/pics/fiat"
+  },
+  {
+    "id": 3,
+    "image": "../../../imagesJson/toyota.jpg",
+    "car": "Voiture Toyota",
+    "title": "Toyota 1.8 GR Sport 122 CH -Hybride",
+    "year": 2017,
+    "gas": "Hybride",
+    "miles": 17236,
+    "price": 23544,
+    "link": "/achat/details/toyota",
+    "picsLink": "/achat/pics/toyota"
+  },
+  {
+    "id": 4,
+    "image": "../../../imagesJson/audi.jpg",
+    "car": "Voiture Audi",
+    "title": "Audi SB 35TFSI S-Tronic 150 CH - Essence",
+    "year": 2021,
+    "gas": "Essence",
+    "miles": 100776,
+    "price": 34067,
+    "link": "/achat/details/audi",
+    "picsLink": "/achat/pics/audi"
+  }
+]

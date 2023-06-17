@@ -34,7 +34,6 @@ overflow-x: hidden;
 const Main = styled.div`
 min-height: calc(100vh - 160px);
 width: 100%;
-border: solid 1px;
 margin: auto;
 display: flex;
 `;
