@@ -43,13 +43,9 @@ export default function SlidePics() {
     setCurrent(current === 0 ? lenght - 1 : current - 1);
   }
 
-  if (!Array.isArray(picture.img) || lenght <= 0) {
-    return <p>Il n'y a pas d'image renseigner pour ce type de véhicule</p>
-  }
-
   return (
     <Wrapper>
-      {picture ? (
+    {picture ? 
         <section className="slider">
           <FaArrowAltCircleLeft className="arrows left-arrow" onClick={prevSlide} />
           <FaArrowAltCircleRight className="arrows right-arrow" onClick={nextSlide} />
@@ -61,13 +57,9 @@ export default function SlidePics() {
                 )}
               </div>
             )
-            
           })}
         </section>
-      )
-        : null
-      }
-      
+        : <Error>Erreur: Cette page n'existe pas</Error>}
     </Wrapper>
   );
 };
@@ -84,16 +76,9 @@ width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-& .image {
-  width: 100%;
-  border-radius: 10px;
-}
-& .right-arrow {
-  right: 32px; 
-}
-& .left-arrow{
-  left: 32px;
+  @media screen and (max-width: 768px){
+    position: static;
+  }
 }
 & .arrows {
   top: 50%;
@@ -103,6 +88,23 @@ width: 100%;
   z-index: 10;
   cursor: pointer;
   user-select: none;
+  @media screen and (max-width: 768px){
+    top: 65%;
+    left: 50%;
+  }
+}
+& .image {
+  width: 100%;
+  border-radius: 10px;
+  @media screen and (max-width: 768px){
+    width: 60%;
+  }
+}
+& .right-arrow {
+  right: 32px; 
+}
+& .left-arrow{
+  left: 25px;
 }
 & .slide {
   opacity: 0;
@@ -113,4 +115,11 @@ width: 100%;
   transition-duration: 1s;
   transform: scale(1.08);
 }
+`;
+
+const Error = styled.p`
+  font-family: libre baskerville;
+  font-size: 32px;
+  font-weight: 600;
+  color: #ec1329;
 `;

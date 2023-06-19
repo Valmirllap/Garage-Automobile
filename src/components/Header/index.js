@@ -8,7 +8,7 @@ import { useRef } from "react";
 import { useState } from "react";
 
 
-export default function Header({ handleToogleTheme, isLight}) {
+export default function Header({ handleToogleTheme}) {
 
   const location = useLocation();
   const [isNavVisible, setIsNavVisible] = useState(false);
@@ -25,7 +25,7 @@ export default function Header({ handleToogleTheme, isLight}) {
     <Wrapper>
       <DivFlex className="flex">
         <Link to="/"><Image src={Logo} /></Link>
-        <MaterialUISwitch onClick={handleToogleTheme}>{isLight ? "Dark" : "Light"}</MaterialUISwitch>
+        <MaterialUISwitch onClick={handleToogleTheme}/>
       </DivFlex>
       <nav ref={navRef} className={isNavVisible ? "responsive_nav" : ""}>
         <Link onClick={hideNavBar} to="/" >
@@ -114,7 +114,7 @@ font-size: 18px;
 font-family: Barlow;
 margin-right: 20px;
 padding-bottom: 2px;
-border-bottom: solid 2px ${(props) => props.isCurrentPage ? "" : "trasparent"};
+border-bottom: solid 2px ${(props) => props.isCurrentPage ? "" : "transparent"};
 &:hover{
   border-bottom: solid 2px;
 }

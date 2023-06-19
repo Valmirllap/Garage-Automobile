@@ -36,9 +36,9 @@ export default function Footer() {
       menu: "Connexion",
       link: "/connexion",
       contact: [
-        <Link to="https://www.facebook.com"><FaFacebookSquare className="social-logo" /></Link>,
-        <Link to="https://www.instagram.com"><FaInstagramSquare className="social-logo" /></Link>,
-        <Link to="https://www.twitter.com"><FaTwitterSquare className="social-logo" /></Link>
+        <Link to="https://www.facebook.com"><FaFacebookSquare className="social-logo"/></Link>,
+        <Link to="https://www.instagram.com"><FaInstagramSquare className="social-logo"/></Link>,
+        <Link to="https://www.twitter.com"><FaTwitterSquare className="social-logo"/></Link>
       ],
       openingTime: "jeu.: 08:45 - 12:00, 14:00 - 18:00"
     },
@@ -49,6 +49,7 @@ export default function Footer() {
   return (
     <Wrapper>
       <table>
+        <tbody>
         <tr>
           <th>Location</th>
           <th>Menu</th>
@@ -65,6 +66,7 @@ export default function Footer() {
             </tr>
           )
         })}
+        </tbody>
       </table>
     </Wrapper>
   )

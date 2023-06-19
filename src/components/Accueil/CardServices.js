@@ -17,9 +17,9 @@ export default function CardServices() {
     <Display>
       {services.map((value) => {
         return (
-          <ContainerService>
+          <ContainerService key={value.id}>
             <Img src={value.image} alt={value.title} />
-            <ServiceText key={value.id}>
+            <ServiceText>
               <h1>{value.title}</h1>
               <p>{value.price}</p>
             </ServiceText>
