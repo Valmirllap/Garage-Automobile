@@ -8,6 +8,7 @@ import Connexion from './components/Connexion';
 import CarDetails from './components/CarDetails/index';
 import SlidePics from './components/SlidePics';
 import ScrollToTop from './components/hook/ScrollToTop';
+import Register from './components/Register';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <ScrollToTop/>
       <Layout>
         <Routes>
+          <Route element={<Register/>} path='/register' />
           <Route element={<Connexion/>} path='/connexion'/>
           <Route element={<Contact/>} path='/contactez-nous'/>
           <Route element={<CarDetails/>} path='/achat/details/:id'/>
