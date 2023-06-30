@@ -2,12 +2,16 @@ const express = require("express");
 const mysql = require("mysql");
 const cors = require('cors');
 
+// AUTHORISATION
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
 const bcrypt = require('bcrypt');
 const saltRound = 10;
+// ==================
+// AUTHENTICATION
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -49,6 +53,27 @@ app.get("/login", (req, res) => {
   }
 });
 
+const verifyJWT = (req, res, next) => {
+  const token = req.headers["x-access-token"]
+
+  if (!token) {
+    res.send("No token found!")
+  } else {
+    jwt.verify(token, "jwtSecret", (err, decoded) => {
+      if (err) {
+        res.json({ auth: false, message: "Failed Authenticate" });
+      } else {
+        req.workerId = decoded.id;
+        next();
+      }
+    });
+  }
+};
+
+app.get('/isAuth', verifyJWT, (req, res) => {
+  res.send("Authentification réussi! Vous allez être redirigé.")
+})
+
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
   db.query(
@@ -60,16 +85,21 @@ app.post('/login', (req, res) => {
       } else if (result.length > 0) {
         bcrypt.compare(password, result[0].password, (error, response) => {
           if (response) {
-            req.session.user = result[0];
+            const id = result[0].id;
             const isAdmin = result[0].isAdmin;
             const isEmployee = result[0].isEmployee;
-            res.send({ ...result[0], isAdmin, isEmployee });
+            const token = jwt.sign({ id, isAdmin, isEmployee }, "jwtSecret", {
+              expiresIn: 300,
+            })
+            req.session.user = result[0];
+            res.json({ auth: true, token: token, result: {...result[0], isAdmin, isEmployee} })
+            // res.send({ ...result[0], isAdmin, isEmployee });
           } else {
-            res.send({ message: "Email ou Mot de passe invalide" });
+            res.json({ auth: false, message: "Email ou Mot de passe invalide" });
           }
         });
       } else {
-        res.send({ message: "Email introuvable" });
+        res.json({ auth: false, message: "Email introuvable" });
       }
     }
   );
