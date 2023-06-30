@@ -11,15 +11,15 @@ export default function Register() {
   const navigate = useNavigate();
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [logged, setLogged] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
     Axios.get("http://localhost:3002/login", { withCredentials: true })
       .then((response) => {
         if (response.data.loggedIn === true) {
-          setLoggedIn(true);
-          setIsAdmin(response.data.isAdmin);
+          setLogged(true);
+          setAdmin(response.data.isAdmin);
         }
       })
       .catch((error) => {
@@ -40,7 +40,7 @@ export default function Register() {
       });
   };
 
-  if (!loggedIn || !isAdmin) {
+  if (!logged || !admin) {
     navigate('/register');
     return (
       <ErrorContainer>

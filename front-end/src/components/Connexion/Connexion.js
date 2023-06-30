@@ -8,33 +8,42 @@ export default function Connexion() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginStatus, setLoginStatus] = useState("");
+  const [message, setMessage] = useState("");
+  const [loginStatus, setLoginStatus] = useState(false);
 
   Axios.defaults.withCredentials = true;
   const login = (e) => {
     e.preventDefault();
-    Axios.post('http://localhost:3002/login', {
-      email: email,
-      password: password,
-    }).then((response) => {
-      if (response.data.message) {
-        setLoginStatus(response.data.message);
-      } else {
-        const isAdmin = response.data.isAdmin;
-        const isEmployee = response.data.isEmployee;
-        if (isAdmin) {
-          navigate("/register");
+      Axios.post('http://localhost:3002/login', {
+        email: email,
+        password: password,
+      }).then((response) => {
+        if (!response.data.auth) {
+          setLoginStatus(false);
+          setMessage(response.data.message);
+        } else {
+          localStorage.setItem("token", response.data.token);
+          setLoginStatus(true);
+          setMessage("");
+
+          setTimeout(() => {
+            const isAdmin = response.data.result.isAdmin;
+            const isEmployee = response.data.result.isEmployee;
+            if (isAdmin) {
+              navigate("/register");
+            } else if (isEmployee) {
+              navigate("/contactez-nous");
+            }
+          }, 7000);
+          
         }
-        else if (isEmployee) {
-          navigate("/contactez-nous");
-        }
-      }
-    });
+      });
   };
+
   useEffect(() => {
     Axios.get("http://localhost:3002/login").then((response) => {
       if (response.data.loggedIn === true) {
-        setLoginStatus(
+        setMessage(
           <div>
             <p>You're still connected</p>
             <Link to="/">Go to the dashBoard</Link>
@@ -43,6 +52,19 @@ export default function Connexion() {
       }
     });
   }, []);
+
+
+  const userAuth = () => {
+    Axios.get('http://localhost:3002/isAuth', {
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      }
+    }).then((response) => {
+      if (response.data) {
+        setMessage(response.data)
+      }
+    })
+  }
 
   return (
     <ContainerConnexion>
@@ -74,7 +96,8 @@ export default function Connexion() {
           <Link className="font-text">Mot de passe oublié?</Link>
 
           <ConnectButton onClick={login}>Se connecter</ConnectButton>
-          <ErrorMessage>{loginStatus}</ErrorMessage>
+          {loginStatus && <AuthButton type="button" onClick={userAuth}>Cliquez pour Authentification</AuthButton>}
+          <ErrorMessage>{message}</ErrorMessage>
         </Form>
       </ContainerInfoConnexion>
     </ContainerConnexion>
@@ -161,9 +184,24 @@ border: none;
 border-radius: 5px;
 `;
 
+
+const AuthButton = styled.button`
+font-family: barlow;
+font-size: 18px;
+font-weight: 600;
+background-color: #F5CB5C;
+color: #242425;
+padding: 7px;
+width: 70%;
+cursor: pointer;
+border: none;
+border-radius: 5px;
+margin-top: 15px;
+`;
 const ErrorMessage = styled.h1`
   font-family: libre baskreville;
   font-size: 18px;
   color: red;
   margin-top: 15px;
+  margin-bottom: 15px;
 `;
