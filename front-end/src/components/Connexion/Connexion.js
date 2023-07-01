@@ -61,6 +61,7 @@ export default function Connexion() {
       }
     }).then((response) => {
       if (response.data) {
+        console.log(response)
         setMessage(response.data)
       }
     })

@@ -13,6 +13,7 @@ export default function Register() {
   const [registerPassword, setRegisterPassword] = useState("");
   const [logged, setLogged] = useState(false);
   const [admin, setAdmin] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
   useEffect(() => {
     Axios.get("http://localhost:3002/login", { withCredentials: true })
@@ -27,7 +28,17 @@ export default function Register() {
       });
   }, []);
 
+  const validateEmail = (email) => {
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regexEmail.test(email);
+  };
+
   const register = () => {
+    if (!validateEmail(registerEmail)) {
+      setEmailError(true);
+      return;
+    }
+
     Axios.post('http://localhost:3002/register', {
       email: registerEmail,
       password: registerPassword
@@ -62,8 +73,11 @@ export default function Register() {
             name="email"
             onChange={(e) => {
               setRegisterEmail(e.target.value);
+              setEmailError(false);
             }}
             required />
+
+            {emailError && <ErrorText className='font-text'>Entrer un email: exemple@worker.com</ErrorText>}
 
           <Label className="font-text">Mot de passe</Label>
           <Input
@@ -73,7 +87,7 @@ export default function Register() {
               setRegisterPassword(e.target.value);
             }}
             required />
-          <ConnectButton onClick={register}>Inscrire</ConnectButton>
+          <ConnectButton className='font-text' onClick={register}>Inscrire</ConnectButton>
         </Form>
       </ContainerInfoConnexion>
     </ContainerConnexion>
@@ -111,7 +125,6 @@ margin-bottom: 60px;
 `;
 
 const Title = styled.h1`
-font-family: Libre baskerville;
 font-weight: 600;
 font-size: 25px;
 `;
@@ -128,7 +141,6 @@ font-size: 20px;
 `;
 
 const Label = styled.label`
-font-family: barlow;
 font-size: 18px;
 margin-bottom: 10px;
 `;
@@ -145,7 +157,6 @@ border: none;
 `;
 
 const ConnectButton = styled.button`
-font-family: barlow;
 font-size: 18px;
 font-weight: 600;
 background-color: #242425;
@@ -169,4 +180,10 @@ background-color: rgba(255, 50, 50, 0.8);
 const Denied = styled.h1`
 color: #242425;
 font-size: 32px;
+`;
+
+const ErrorText = styled.p`
+color: red;
+font-weight: 600;
+margin-bottom: 10px;
 `;
