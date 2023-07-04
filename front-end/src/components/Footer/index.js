@@ -36,9 +36,9 @@ export default function Footer() {
       menu: "Connexion",
       link: "/connexion",
       contact: [
-        <Link to="https://www.facebook.com"><FaFacebookSquare className="social-logo"/></Link>,
-        <Link to="https://www.instagram.com"><FaInstagramSquare className="social-logo"/></Link>,
-        <Link to="https://www.twitter.com"><FaTwitterSquare className="social-logo"/></Link>
+        <Link to="https://www.facebook.com"><FaFacebookSquare className="social-logo" /></Link>,
+        <Link to="https://www.instagram.com"><FaInstagramSquare className="social-logo" /></Link>,
+        <Link to="https://www.twitter.com"><FaTwitterSquare className="social-logo" /></Link>
       ],
       openingTime: "jeu.: 08:45 - 12:00, 14:00 - 18:00"
     },
@@ -50,22 +50,22 @@ export default function Footer() {
     <Wrapper>
       <table>
         <tbody>
-        <tr>
-          <th>Location</th>
-          <th>Menu</th>
-          <th>Contact</th>
-          <th>Horaire d'ouverture</th>
-        </tr>
-        {data.map((value) => {
-          return (
-            <tr key={value.id}>
-              <td>{value.location}</td>
-              <td><Link className="menu" to={value.link}>{value.menu}</Link></td>
-              <td>{value.contact}</td>
-              <td>{value.openingTime}</td>
-            </tr>
-          )
-        })}
+          <tr>
+            <th>Location</th>
+            <th>Menu</th>
+            <th>Contact</th>
+            <th>Horaire d'ouverture</th>
+          </tr>
+          {data.map((value) => {
+            return (
+              <tr key={value.id}>
+                <td>{value.location}</td>
+                <td><Link className="menu" to={value.link}>{value.menu}</Link></td>
+                <td>{value.contact}</td>
+                <td>{value.openingTime}</td>
+              </tr>
+            )
+          })}
         </tbody>
       </table>
     </Wrapper>

@@ -1,39 +1,87 @@
 import styled from "styled-components";
 import { FaStar } from 'react-icons/fa';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Axios from "axios"
+
 
 export default function CommentSection() {
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
-  const [message, setMessage] = useState('');
   const [comments, setComments] = useState([]);
+  const [newComments, setNewComments] = useState([]);
+  const [updateReview, setUpdateReview] = useState("");
+
+  useEffect(() => {
+    Axios.get('http://localhost:3002/api/get').then((response) => {
+      setComments(response.data.slice(-4));
+    })
+  }, [])
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-
-    if (message && rating) {
+    Axios.post('http://localhost:3002/api/insert', {
+      name: name,
+      message: message,
+      rating: rating,
+    });
+    if (name && message && rating) {
       const newComment = {
+        name: name,
         message: message,
         rating: rating
       };
-      setComments([newComment, ...comments.slice(0, 2)]);
+      setNewComments([newComment]); // pour afficher tous les messages on peut rajouter [newComment, ...newComments.slice(0,2)] pour les 3 premiers commentaires inscrit
+      setComments([...comments, {
+        name: name,
+        message: message,
+        rating: rating,
+      }
+      ]);
+      setName('');
       setMessage('');
       setRating(null);
-    };
+    }
   };
 
-  const handleChange = (e) => {
-    setMessage(e.target.value);
+  const deleteComment = (id) => {
+    Axios.delete(`http://localhost:3002/api/delete/${id}`);
   }
+
+  const updateComment = (id) => {
+    Axios.put('http://localhost:3002/api/update', {
+      message: updateReview,
+      id: id,
+    });
+    setUpdateReview("");
+  }
+
+  const handleRatingChange = (e) => {
+    const selectedRating = parseInt(e.target.value);
+    setRating(selectedRating);
+  };
+
   return (
     <Comments>
-      <Form onSubmit={handleCommentSubmit}>
+      <Form>
         <TitleComments>Donnez votre avis sur nos service:</TitleComments>
+        <Name
+          type="text"
+          name="name"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+          placeholder="Entrez votre nom"
+        />
         <Message
           rows="10"
           value={message}
-          onChange={handleChange}
-          placeholder="Entrer votre commentaire"></Message>
+          onChange={(e) => {
+            setMessage(e.target.value);
+          }}
+          placeholder="Entrer votre avis"></Message>
         <div>
           {[...Array(5)].map((start, index) => {
             const currentRating = index + 1;
@@ -43,7 +91,9 @@ export default function CommentSection() {
                   type="radio"
                   name="rating"
                   value={currentRating}
-                  onClick={() => setRating(currentRating)}
+                  onClick={handleRatingChange}
+                  checked={rating === currentRating}
+                  readOnly
                 />
                 <FaStar
                   className="star"
@@ -56,22 +106,34 @@ export default function CommentSection() {
             )
           })}
         </div>
-        <Send type="submit">Envoyer</Send>
+        <Send type="submit" onClick={handleCommentSubmit}>Envoyer</Send>
       </Form>
-
       <TitleComments>Avis récent:</TitleComments>
       {comments.length > 0 ? (
         <ul>
-          {comments.slice(0, 3).map((comment, index) => (
-            <li key={index}>
-              <p>{comment.message}. {comment.rating}/5 <FaStar /></p>
-            </li>
+          {comments.slice(0, 4).map((comment, index) => (
+            <Li key={index}>
+              <p><ItalicB>{comment.name}:</ItalicB> {comment.message}. {comment.rating}/5 <FaStar /></p>
+              <Changes onClick={() => {deleteComment(comment.id)}}>Supprimer</Changes>
+              <input type="text" onChange={(e) => {
+                setUpdateReview(e.target.value)
+              }}/>
+              <Changes onClick={() => {updateComment(comment.id)}}>Modifier</Changes>
+            </Li>
           ))}
+          {newComments.map((value, index) => {
+            return (
+              <div key={index}>
+                <p>
+                  <ItalicB>{value.name}: </ItalicB> {value.message}. {value.rating}/5 <FaStar />
+                </p>
+              </div>
+            )
+          })}
         </ul>
       ) : (
         <p>Soyer le premier commentaire.</p>
-      )
-      }
+      )}
     </Comments>
   );
 };
@@ -85,7 +147,7 @@ padding: 10px;
 background-color: #F5CB5C;
 color: #333533;
 width: 100%;
-height: 500px;
+height: 650px;
 & input[type=radio]{
   display: none;
 }
@@ -96,6 +158,12 @@ height: 500px;
 const Form = styled.form`
 display: flex;
 flex-direction: column;
+`;
+const Li = styled.li`
+margin-bottom: 5px;
+border: solid 2px #242425 ;
+padding: 10px;
+margin-right: 20px;
 `;
 
 
@@ -116,14 +184,32 @@ width: 500px;
 }
 `;
 
+const Name = styled.input`
+width: 500px;
+margin-bottom: 10px;
+@media screen and (max-width: 576px){
+  width: 350px;
+}
+`;
+const ItalicB = styled.i`
+font-family: barlow;
+font-weight: 600;
+font-size: 18px;
+font-style: italic;
+`;
+
 const Send = styled.button`
 font-size: 18px;
 font-weight: 600;
-margin-top: 25px;
+margin-top: 10px;
 width: 200px;
 padding: 10px;
 background-color: #242425;
 color: #F5CB5C;
 border: none;
 cursor: pointer;
+`;
+
+const Changes = styled.button`
+margin: 5px 10px 0 10px;
 `;
