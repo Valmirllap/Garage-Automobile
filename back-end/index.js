@@ -2,29 +2,31 @@ const express = require("express");
 const mysql = require("mysql");
 const cors = require('cors');
 
-// AUTHORISATION
+// ========= AUTHORISATION =========
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
 const bcrypt = require('bcrypt');
 const saltRound = 10;
-// ==================
-// AUTHENTICATION
+
+// ========= AUTHENTICATION =========
 const jwt = require('jsonwebtoken');
 
-const app = express();
 
+const app = express();
 app.use(express.json());
 app.use(cors({
   origin: ["http://localhost:3000"],
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST", "DELETE", "PUT"],
   credentials: true
 })
 );
+
+
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+// ========= SESSION =========
 app.use(session({
   key: "workerId",
   secret: "verystrongpassword",
@@ -37,12 +39,15 @@ app.use(session({
   },
 }))
 
-const db = mysql.createConnection({
+
+// ========= SERVER-SIDE FOR CONNEXION =========
+const dbConnexion = mysql.createConnection({
   user: "root",
   host: "localhost",
   password: "password",
   database: "dbLogin",
 });
+
 
 app.get("/login", (req, res) => {
   if (req.session.user) {
@@ -53,9 +58,9 @@ app.get("/login", (req, res) => {
   }
 });
 
+
 const verifyJWT = (req, res, next) => {
   const token = req.headers["x-access-token"]
-
   if (!token) {
     res.send("No token found!")
   } else {
@@ -69,14 +74,14 @@ const verifyJWT = (req, res, next) => {
     });
   }
 };
-
 app.get('/isAuth', verifyJWT, (req, res) => {
   res.send("Authentification réussi! Vous allez être redirigé.")
 })
 
+
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
-  db.query(
+  dbConnexion.query(
     "SELECT * FROM `logged` WHERE email = ?;",
     email,
     (err, result) => {
@@ -93,7 +98,6 @@ app.post('/login', (req, res) => {
             })
             req.session.user = result[0];
             res.json({ auth: true, token: token, result: {...result[0], isAdmin, isEmployee} })
-            // res.send({ ...result[0], isAdmin, isEmployee });
           } else {
             res.json({ auth: false, message: "Email ou Mot de passe invalide" });
           }
@@ -105,6 +109,7 @@ app.post('/login', (req, res) => {
   );
 });
 
+
 app.post("/register", (req, res) => {
   if (req.session.user && req.session.user.isAdmin) {
     const email = req.body.email;
@@ -115,7 +120,7 @@ app.post("/register", (req, res) => {
         console.log(err);
         res.send({ message: "Error" });
       } else {
-        db.query(
+        dbConnexion.query(
           "INSERT INTO `logged` (email, password) VALUES (?,?)",
           [email, hash],
           (err, result) => {
@@ -134,6 +139,53 @@ app.post("/register", (req, res) => {
   }
 });
 
+// ========= SERVER-SIDE FOR COMMENTS =========
+const dbComments = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'CrudComments',
+});
+
+app.get('/api/get', (req, res) => {
+  const sqlSelect = "SELECT * FROM `Reviews`";
+  dbComments.query(sqlSelect, (err, result) => {
+   res.send(result)
+  });
+})
+
+app.post("/api/insert", (req, res) => {
+  const nameReviews = req.body.name;
+  const messageReviews = req.body.message;
+  const ratingReviews = req.body.rating;
+  const sqlInsert = "INSERT INTO `Reviews` (name ,message, rating) VALUES (?,?,?);"
+  dbComments.query(sqlInsert, [nameReviews ,messageReviews, ratingReviews], (err, result) => {
+    console.log(result);
+  })
+});
+
+app.delete("/api/delete/:id", (req, res) => {
+  const id = req.params.id;
+  const sqlDelete = "DELETE FROM `Reviews` WHERE id = ?";
+
+  dbComments.query(sqlDelete, id, (err, result) => {
+   if (err) console.log(err)
+  })
+})
+
+app.put("/api/update", (req, res) => {
+  const message = req.body.message;
+  const id = req.body.id;
+  const sqlUpdate = "UPDATE `Reviews` SET message = ? WHERE id = ?";
+
+  dbComments.query(sqlUpdate, [message, id], (err, result) => {
+   if (err) console.log(err)
+  })
+})
+
+
+
+// ========= LISTENNING SERVER =========
 app.listen(3002, () => {
   console.log("running server")
 });
