@@ -9,6 +9,8 @@ import CarDetails from './components/CarDetails/index';
 import SlidePics from './components/SlidePics';
 import ScrollToTop from './components/hook/ScrollToTop';
 import Register from './components/Register';
+import DashBoard from './components/DashBoard';
+import Error from './components/ErrorPage';
 
 function App() {
 
@@ -17,6 +19,9 @@ function App() {
       <ScrollToTop/>
       <Layout>
         <Routes>
+          <Route element={<Error/>} path='*'/>
+
+          <Route element={<DashBoard/>} path='/dashboard'/>
           <Route element={<Register/>} path='/register' />
           <Route element={<Connexion/>} path='/connexion'/>
           <Route element={<Contact/>} path='/contactez-nous'/>
