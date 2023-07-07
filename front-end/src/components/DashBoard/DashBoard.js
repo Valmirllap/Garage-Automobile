@@ -1,13 +1,17 @@
 import React from 'react'
+import SideBar from './SideBar'
 import styled from 'styled-components'
 
 export default function DashBoard() {
   return (
     <Wrapper>
-      DashBoard
+      <SideBar/>
+      hello
     </Wrapper>
+    
   )
 }
 
-
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+`;

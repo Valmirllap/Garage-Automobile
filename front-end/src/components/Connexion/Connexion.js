@@ -32,7 +32,7 @@ export default function Connexion() {
             if (isAdmin) {
               navigate("/register");
             } else if (isEmployee) {
-              navigate("/contactez-nous");
+              navigate("/dashboard");
             }
           }, 7000);
           
@@ -46,7 +46,7 @@ export default function Connexion() {
         setMessage(
           <div>
             <p>You're still connected</p>
-            <Link to="/">Go to the dashBoard</Link>
+            <Link to="/dashboard">Go to the dashBoard</Link>
           </div>
         )
       }

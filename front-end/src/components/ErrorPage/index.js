@@ -6,7 +6,7 @@ export default function Error() {
   return (
     <ErrorContainer className="error-container">
       <ErrorTitle>Error 404. Cette page n'existe pas!</ErrorTitle>
-      <ErrorText>S'il vous ErrorTextlait vérifier l'URL et réessayez</ErrorText>
+      <ErrorText>S'il vous plaît, vérifier l'URL et réessayez</ErrorText>
       <Link className='linkStyle' to="/">Accueil</Link>
     </ErrorContainer>
   )
