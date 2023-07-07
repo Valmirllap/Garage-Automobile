@@ -11,7 +11,6 @@ export default function CommentSection() {
   const [hover, setHover] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComments, setNewComments] = useState([]);
-  const [updateReview, setUpdateReview] = useState("");
 
   useEffect(() => {
     Axios.get('http://localhost:3002/api/get').then((response) => {
@@ -44,18 +43,6 @@ export default function CommentSection() {
       setRating(null);
     }
   };
-
-  const deleteComment = (id) => {
-    Axios.delete(`http://localhost:3002/api/delete/${id}`);
-  }
-
-  const updateComment = (id) => {
-    Axios.put('http://localhost:3002/api/update', {
-      message: updateReview,
-      id: id,
-    });
-    setUpdateReview("");
-  }
 
   const handleRatingChange = (e) => {
     const selectedRating = parseInt(e.target.value);
@@ -114,20 +101,15 @@ export default function CommentSection() {
           {comments.slice(0, 4).map((comment, index) => (
             <Li key={index}>
               <p><ItalicB>{comment.name}:</ItalicB> {comment.message}. {comment.rating}/5 <FaStar /></p>
-              <Changes onClick={() => {deleteComment(comment.id)}}>Supprimer</Changes>
-              <input type="text" onChange={(e) => {
-                setUpdateReview(e.target.value)
-              }}/>
-              <Changes onClick={() => {updateComment(comment.id)}}>Modifier</Changes>
             </Li>
           ))}
           {newComments.map((value, index) => {
             return (
-              <div key={index}>
+              <Li key={index}>
                 <p>
                   <ItalicB>{value.name}: </ItalicB> {value.message}. {value.rating}/5 <FaStar />
                 </p>
-              </div>
+              </Li>
             )
           })}
         </ul>
@@ -147,7 +129,7 @@ padding: 10px;
 background-color: #F5CB5C;
 color: #333533;
 width: 100%;
-height: 650px;
+height: auto;
 & input[type=radio]{
   display: none;
 }
@@ -208,8 +190,4 @@ background-color: #242425;
 color: #F5CB5C;
 border: none;
 cursor: pointer;
-`;
-
-const Changes = styled.button`
-margin: 5px 10px 0 10px;
 `;
