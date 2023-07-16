@@ -97,7 +97,7 @@ app.post('/login', (req, res) => {
               expiresIn: 300,
             })
             req.session.user = result[0];
-            res.json({ auth: true, token: token, result: {...result[0], isAdmin, isEmployee} })
+            res.json({ auth: true, token: token, result: { ...result[0], isAdmin, isEmployee } })
           } else {
             res.json({ auth: false, message: "Email ou Mot de passe invalide" });
           }
@@ -150,18 +150,24 @@ const dbComments = mysql.createPool({
 app.get('/api/get', (req, res) => {
   const sqlSelect = "SELECT * FROM `Reviews`";
   dbComments.query(sqlSelect, (err, result) => {
-   res.send(result)
+    res.send(result)
   });
 })
 
 app.post("/api/insert", (req, res) => {
-  const nameReviews = req.body.name;
-  const messageReviews = req.body.message;
-  const ratingReviews = req.body.rating;
-  const sqlInsert = "INSERT INTO `Reviews` (name ,message, rating) VALUES (?,?,?);"
-  dbComments.query(sqlInsert, [nameReviews ,messageReviews, ratingReviews], (err, result) => {
-    console.log(result);
-  })
+
+    const nameReviews = req.body.name;
+    const messageReviews = req.body.message;
+    const ratingReviews = req.body.rating;
+    const sqlInsert = "INSERT INTO `Reviews` (name ,message, rating) VALUES (?,?,?);"
+    dbComments.query(sqlInsert, [nameReviews, messageReviews, ratingReviews], (err, result) => {
+      if (err) {
+        res.send({ message: "Erreur, Veuillez réessayer" });
+      } else {
+        res.send({ message: "Commentaire envoyé!" })
+      }
+    })
+  
 });
 
 app.delete("/api/delete/:id", (req, res) => {
@@ -169,7 +175,7 @@ app.delete("/api/delete/:id", (req, res) => {
   const sqlDelete = "DELETE FROM `Reviews` WHERE id = ?";
 
   dbComments.query(sqlDelete, id, (err, result) => {
-   if (err) console.log(err)
+    if (err) console.log(err)
   })
 })
 
@@ -179,10 +185,35 @@ app.put("/api/update", (req, res) => {
   const sqlUpdate = "UPDATE `Reviews` SET message = ? WHERE id = ?";
 
   dbComments.query(sqlUpdate, [message, id], (err, result) => {
-   if (err) console.log(err)
+    if (err) console.log(err)
   })
 })
 
+
+// ========= SERVER-SIDE FOR OPENNINGTIME =========
+
+const dbOpeningTime = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'Schedule',
+});
+
+app.get('/get/opening', (req, res) => {
+  const sqlSelectFooter = "SELECT * FROM `scheduleFooter`";
+  dbOpeningTime.query(sqlSelectFooter, (err, result) => {
+    res.send(result)
+  });
+})
+
+app.put("/update/opening", (req, res) => {
+  const openingTime = req.body.openingTime;
+  const id = req.body.id;
+  const sqlUpdateOpenning = "UPDATE `scheduleFooter` SET openingTime = ? WHERE id = ?";
+  dbOpeningTime.query(sqlUpdateOpenning, [openingTime, id], (err, result) => {
+    if (err) console.log(err)
+  })
+})
 
 
 // ========= LISTENNING SERVER =========
