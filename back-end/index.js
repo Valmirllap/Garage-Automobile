@@ -91,13 +91,11 @@ app.post('/login', (req, res) => {
         bcrypt.compare(password, result[0].password, (error, response) => {
           if (response) {
             const id = result[0].id;
-            const isAdmin = result[0].isAdmin;
-            const isEmployee = result[0].isEmployee;
-            const token = jwt.sign({ id, isAdmin, isEmployee }, "jwtSecret", {
+            const token = jwt.sign({ id }, "jwtSecret", {
               expiresIn: 300,
             })
             req.session.user = result[0];
-            res.json({ auth: true, token: token, result: { ...result[0], isAdmin, isEmployee } })
+            res.json({ auth: true, token: token, result: { ...result[0] }})
           } else {
             res.json({ auth: false, message: "Email ou Mot de passe invalide" });
           }
