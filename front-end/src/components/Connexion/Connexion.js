@@ -14,30 +14,29 @@ export default function Connexion() {
   Axios.defaults.withCredentials = true;
   const login = (e) => {
     e.preventDefault();
-      Axios.post('http://localhost:3002/login', {
-        email: email,
-        password: password,
-      }).then((response) => {
-        if (!response.data.auth) {
-          setLoginStatus(false);
-          setMessage(response.data.message);
-        } else {
-          localStorage.setItem("token", response.data.token);
-          setLoginStatus(true);
-          setMessage("");
+    Axios.post('http://localhost:3002/login', {
+      email: email,
+      password: password,
+    }).then((response) => {
+      if (!response.data.auth) {
+        setLoginStatus(false);
+        setMessage(response.data.message);
+      } else {
+        localStorage.setItem("token", response.data.token);
+        setLoginStatus(true);
+        setMessage("");
 
-          setTimeout(() => {
-            const isAdmin = response.data.result.isAdmin;
-            const isEmployee = response.data.result.isEmployee;
-            if (isAdmin) {
-              navigate("/register");
-            } else if (isEmployee) {
-              navigate("/dashboard");
-            }
-          }, 7000);
-          
-        }
-      });
+        setTimeout(() => {
+          const isAdmin = response.data.result.isAdmin;
+          const isEmployee = response.data.result.isEmployee;
+          if (isAdmin) {
+            navigate("/register");
+          } else if (isEmployee) {
+            navigate("/dashboard");
+          }
+        }, 7000);
+      }
+    });
   };
 
   useEffect(() => {

@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { useEffect } from 'react';
 
 export default function Register() {
   const navigate = useNavigate();
