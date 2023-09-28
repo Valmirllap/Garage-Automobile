@@ -19,15 +19,16 @@ export default function CommentSection() {
   }, [])
 
   const handleCommentSubmit = (e) => {
-    e.preventDefault();
+    const anonymousName = name.length === 0 ? "anonymous" : name;
+    e.preventDefault()
     Axios.post('http://localhost:3002/api/insert', {
-      name: name,
+      name: anonymousName,
       message: message,
       rating: rating,
     });
-    if (name && message && rating) {
+    if (anonymousName && message && rating) {
       const newComment = {
-        name: name,
+        name: anonymousName,
         message: message,
         rating: rating
       };
@@ -51,7 +52,7 @@ export default function CommentSection() {
 
   return (
     <Comments>
-      <Form>
+      <Form onSubmit={handleCommentSubmit}>
         <TitleComments>Donnez votre avis sur nos service:</TitleComments>
         <Name
           type="text"
@@ -60,7 +61,8 @@ export default function CommentSection() {
           onChange={(e) => {
             setName(e.target.value);
           }}
-          placeholder="Entrez votre nom"
+          placeholder="Entrez votre nom ou vide pour être anonyme"
+          
         />
         <Message
           rows="10"
@@ -68,7 +70,9 @@ export default function CommentSection() {
           onChange={(e) => {
             setMessage(e.target.value);
           }}
-          placeholder="Entrer votre avis"></Message>
+          placeholder="Entrer votre avis"
+          required
+        />
         <div>
           {[...Array(5)].map((start, index) => {
             const currentRating = index + 1;
@@ -81,6 +85,7 @@ export default function CommentSection() {
                   onClick={handleRatingChange}
                   checked={rating === currentRating}
                   readOnly
+                  required
                 />
                 <FaStar
                   className="star"
@@ -93,21 +98,21 @@ export default function CommentSection() {
             )
           })}
         </div>
-        <Send type="submit" onClick={handleCommentSubmit}>Envoyer</Send>
+        <Send type="submit">Envoyer</Send>
       </Form>
       <TitleComments>Avis récent:</TitleComments>
       {comments.length > 0 ? (
         <ul>
           {comments.slice(0, 4).map((comment, index) => (
             <Li key={index}>
-              <p><ItalicB>{comment.name}:</ItalicB> {comment.message}. {comment.rating}/5 <FaStar /></p>
+              <p><ItalicB>{comment.name}:</ItalicB> {comment.message} - {comment.rating}/5 <FaStar /></p>
             </Li>
           ))}
           {newComments.map((value, index) => {
             return (
               <Li key={index}>
                 <p>
-                  <ItalicB>{value.name}: </ItalicB> {value.message}. {value.rating}/5 <FaStar />
+                  <ItalicB>{value.name}: </ItalicB> {value.message} - {value.rating}/5 <FaStar />
                 </p>
               </Li>
             )

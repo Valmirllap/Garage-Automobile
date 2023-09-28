@@ -13,23 +13,27 @@ export default function AccueilDashboard() {
   const [hover, setHover] = useState(null);
   const [comments, setComments] = useState([]);
   const [updateReview, setUpdateReview] = useState("");
+  const [logged, setLogged] = useState(false);
 
+  // =========================== GET COMMENTS ===========================
   useEffect(() => {
     Axios.get('http://localhost:3002/api/get').then((response) => {
       setComments(response.data);
     })
   }, [])
 
+  // =========================== CREATE COMMENTS ===========================
   const handleCommentSubmit = (e) => {
     e.preventDefault();
+    const anonymousName = name.length === 0 ? "anonymous" : name;
     Axios.post('http://localhost:3002/api/insert', {
-      name: name,
+      name: anonymousName,
       message: message,
       rating: rating,
     });
-    if (name && message && rating) {
+    if (anonymousName && message && rating) {
       setComments([...comments, {
-        name: name,
+        name: anonymousName,
         message: message,
         rating: rating,
       }
@@ -40,28 +44,55 @@ export default function AccueilDashboard() {
     }
   };
 
+  // =========================== DELETE COMMENTS ===========================
   const deleteComment = (id) => {
     Axios.delete(`http://localhost:3002/api/delete/${id}`);
+    window.location.reload();
   }
 
+  // =========================== UPDATE COMMENTS ===========================
   const updateComment = (id) => {
     Axios.put('http://localhost:3002/api/update', {
       message: updateReview,
       id: id,
     });
     setUpdateReview("");
+    window.location.reload();
   }
 
+  // =========================== DISPLAY THE RATING ===========================
   const handleRatingChange = (e) => {
     const selectedRating = parseInt(e.target.value);
     setRating(selectedRating);
   };
+
+  // =========================== Access ADMIN and EMPLOYEE ===========================
+  useEffect(() => {
+    Axios.get("http://localhost:3002/login", { withCredentials: true })
+      .then((response) => {
+        if (response.data.loggedIn === true) {
+          setLogged(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  if (!logged) {
+    return (
+      <ErrorContainer>
+        <Denied>Accès refusé ! Vous n'avez pas accès à cette page.</Denied>
+      </ErrorContainer>
+    );
+  }
+
   return (
     <Wrapper>
       <MainTitle text="Service réparation" />
       <CardServices />
       <Comments>
-        <Form>
+        <Form onSubmit={handleCommentSubmit}>
           <TitleComments>Donnez votre avis sur nos service:</TitleComments>
           <Name
             type="text"
@@ -78,7 +109,9 @@ export default function AccueilDashboard() {
             onChange={(e) => {
               setMessage(e.target.value);
             }}
-            placeholder="Entrer votre avis"></Message>
+            placeholder="Entrer votre avis"
+            required
+            />
           <div>
             {[...Array(5)].map((start, index) => {
               const currentRating = index + 1;
@@ -91,6 +124,7 @@ export default function AccueilDashboard() {
                     onClick={handleRatingChange}
                     checked={rating === currentRating}
                     readOnly
+                    required
                   />
                   <FaStar
                     className="star"
@@ -103,14 +137,14 @@ export default function AccueilDashboard() {
               )
             })}
           </div>
-          <Send type="submit" onClick={handleCommentSubmit}>Envoyer</Send>
+          <Send type="submit">Envoyer</Send>
         </Form>
         <TitleComments>Avis récent:</TitleComments>
         {comments.length > 0 ? (
           <ul>
             {comments.map((comment, index) => (
               <Li key={index}>
-                <p><ItalicB>{comment.name}:</ItalicB> {comment.message}. {comment.rating}/5 <FaStar /></p>
+                <p><ItalicB>{comment.name}:</ItalicB> {comment.message} - {comment.rating}/5 <FaStar /></p>
                 <Changes onClick={() => { deleteComment(comment.id) }}>Supprimer</Changes>
                 <input type="text" onChange={(e) => {
                   setUpdateReview(e.target.value)
@@ -204,4 +238,16 @@ cursor: pointer;
 
 const Changes = styled.button`
 margin: 5px 10px 0 10px;
+`;
+
+const ErrorContainer = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+background-color: rgba(255, 50, 50, 0.8);
+`;
+const Denied = styled.h1`
+color: #242425;
+font-size: 32px;
 `;
