@@ -9,7 +9,7 @@ export default function MainTitle({text}) {
 };
 
 const TitleContainer = styled.div`
-diplay: flex;
+display: flex;
 align-items: center;
 justify-content: center;
 width: 100vw;

@@ -7,7 +7,7 @@ body{
   color: ${(props) => props.theme.mainColor}
 }
 
-/* SOCIAL MEDIA LOGO */
+// SOCIAL MEDIA LOGO 
 
 & .social-logo{
   font-size: 25px;
@@ -23,7 +23,6 @@ body{
   }
 }
 
-/* DetailCar component Class and Tag*/
 & .btn{
   font-family: barlow;
   font-weight: 600;
@@ -40,7 +39,6 @@ body{
 & b {
   font-weight: 600;
 }
-
 `;
 
 export default GlobalStyle;

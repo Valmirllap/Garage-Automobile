@@ -10,7 +10,9 @@ return (
   </Wrapper>
   )
 };
+
 // Body
+
 const Wrapper = styled.div`
 overflow-x:hidden;
 `;

@@ -27,14 +27,14 @@ export default function CommentSection() {
       rating: rating,
     });
     if (anonymousName && message && rating) {
-      const newComment = {
+      const storeNewComment = {
         name: anonymousName,
         message: message,
         rating: rating
       };
-      setNewComments([newComment]); // pour afficher tous les messages on peut rajouter [newComment, ...newComments.slice(0,2)] pour les 3 premiers commentaires inscrit
+      setNewComments([storeNewComment]);
       setComments([...comments, {
-        name: name,
+        name: anonymousName,
         message: message,
         rating: rating,
       }
@@ -62,7 +62,6 @@ export default function CommentSection() {
             setName(e.target.value);
           }}
           placeholder="Entrez votre nom ou vide pour être anonyme"
-          
         />
         <Message
           rows="10"
@@ -108,15 +107,13 @@ export default function CommentSection() {
               <p><ItalicB>{comment.name}:</ItalicB> {comment.message} - {comment.rating}/5 <FaStar /></p>
             </Li>
           ))}
-          {newComments.map((value, index) => {
-            return (
-              <Li key={index}>
+          {comments.length > 4 && newComments.length > 0 && (
+              <Li>
                 <p>
-                  <ItalicB>{value.name}: </ItalicB> {value.message} - {value.rating}/5 <FaStar />
+                  <ItalicB>{newComments[0].name}: </ItalicB> {newComments[0].message} - {newComments[0].rating}/5 <FaStar />
                 </p>
               </Li>
-            )
-          })}
+          )}
         </ul>
       ) : (
         <p>Soyer le premier commentaire.</p>
@@ -125,6 +122,11 @@ export default function CommentSection() {
   );
 };
 
+// ==============================================================================
+// ==============================================================================
+// ============================== STYLED-COMPONENT ==============================
+// ==============================================================================
+// ==============================================================================
 
 const Comments = styled.div`
 display: flex;

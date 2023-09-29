@@ -12,5 +12,4 @@ export default function ConnexionForm() {
   )
 }
 
-const Wrapper = styled.div`
-`;
+const Wrapper = styled.div``;

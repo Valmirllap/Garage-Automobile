@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Axios from "axios"
 import CardServices from '../Accueil/CardServices';
 import MainTitle from '../hook/MainTitle';
+import SideBar from './SideBar'
 
 export default function AccueilDashboard() {
   const [name, setName] = useState('');
@@ -90,6 +91,7 @@ export default function AccueilDashboard() {
   return (
     <Wrapper>
       <MainTitle text="Service réparation" />
+      <SideBar/>
       <CardServices />
       <Comments>
         <Form onSubmit={handleCommentSubmit}>
@@ -160,6 +162,12 @@ export default function AccueilDashboard() {
     </Wrapper>
   )
 }
+
+// ==============================================================================
+// ==============================================================================
+// ============================== STYLED-COMPONENT ==============================
+// ==============================================================================
+// ==============================================================================
 
 const Wrapper = styled.div`
 width: 100%;

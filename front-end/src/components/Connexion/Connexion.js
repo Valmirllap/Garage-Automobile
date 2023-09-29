@@ -104,6 +104,12 @@ export default function Connexion() {
   );
 };
 
+// ==============================================================================
+// ==============================================================================
+// ============================== STYLED-COMPONENT ==============================
+// ==============================================================================
+// ==============================================================================
+
 const ContainerConnexion = styled.div`
 display: flex;
 align-items: center;
@@ -125,9 +131,7 @@ margin-bottom: 50px;
   font-size: 12px;
 }
 `;
-const ContainerInfoConnexion = styled.div`
-
-`;
+const ContainerInfoConnexion = styled.div``;
 
 const ContainerTitleText = styled.div`
 margin-top: 30px;

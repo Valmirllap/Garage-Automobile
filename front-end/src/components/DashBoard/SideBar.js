@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { SidebarData } from './SidebarData'
+import { Link } from 'react-router-dom'
 
 function SideBar() {
   return (
@@ -8,16 +9,15 @@ function SideBar() {
       <SidebarList>
         {SidebarData.map((value, key) => {
           return (
-            <RowList
-              key={key}
-              id={window.location.pathname === value.link ? "active" : ""}
-              onClick={() => {
-                window.location.pathname = value.link
-              }}
-            >
-              <Icon>{value.icon}</Icon>
-              <Title>{value.title}</Title>
-            </RowList>
+            <Link to={value.link}>
+              <RowList
+                key={key}
+                id={window.location.pathname === value.link ? "active" : ""}
+              >
+                <Icon>{value.icon}</Icon>
+                <Title>{value.title}</Title>
+              </RowList>
+            </Link>
           )
         })}
       </SidebarList>
@@ -27,8 +27,14 @@ function SideBar() {
 
 export default SideBar
 
+// ==============================================================================
+// ==============================================================================
+// ============================== STYLED-COMPONENT ==============================
+// ==============================================================================
+// ==============================================================================
+
 const Sidebar = styled.div`
-height: 100%;
+height: auto;
 width: 250px;
 background-color: ${(props) => props.theme.mainColor};
 color: ${(props) => props.theme.backgroundColor};
@@ -38,7 +44,10 @@ const SidebarList = styled.ul`
   height: auto;
   width: 100%;
   & #active {
-    background-color: #242425;
+    background-color: ${(props) => props.theme.backgroundColor === '#E8EDDF' ? '#242423' : 'white'};
+  }
+  & a {
+    text-decoration: none;
   }
 `;
 
@@ -49,10 +58,11 @@ const RowList = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: ${(props) => props.theme.backgroundColor};
   &:hover {
     cursor: pointer;
-    background-color: #242425;
-    color: #E8EDDF;
+    background-color: ${(props) => props.theme.backgroundColor === '#E8EDDF' ? '#242423' : 'white'};
+    color: ${(props) => props.theme.backgroundColor === '#E8EDDF' ? '#E8EDDF' : '#242423'};;
   }
 `;
 
