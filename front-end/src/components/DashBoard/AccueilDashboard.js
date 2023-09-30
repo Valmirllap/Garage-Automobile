@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import Axios from "axios"
 import CardServices from '../Accueil/CardServices';
 import MainTitle from '../hook/MainTitle';
-import SideBar from './SideBar'
+import SideBar from './SideBar';
+import AccesDenied from '../hook/AccesDenied';
 
 export default function AccueilDashboard() {
   const [name, setName] = useState('');
@@ -15,6 +16,7 @@ export default function AccueilDashboard() {
   const [comments, setComments] = useState([]);
   const [updateReview, setUpdateReview] = useState("");
   const [logged, setLogged] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // =========================== GET COMMENTS ===========================
   useEffect(() => {
@@ -77,14 +79,19 @@ export default function AccueilDashboard() {
       })
       .catch((error) => {
         console.log(error);
-      });
+      })
+      .finally(() => {
+        setLoading(false);
+      })
   }, []);
+
+  if (loading) {
+    return null
+  }
 
   if (!logged) {
     return (
-      <ErrorContainer>
-        <Denied>Accès refusé ! Vous n'avez pas accès à cette page.</Denied>
-      </ErrorContainer>
+      <AccesDenied/>
     );
   }
 
@@ -246,16 +253,4 @@ cursor: pointer;
 
 const Changes = styled.button`
 margin: 5px 10px 0 10px;
-`;
-
-const ErrorContainer = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-width: 100%;
-background-color: rgba(255, 50, 50, 0.8);
-`;
-const Denied = styled.h1`
-color: #242425;
-font-size: 32px;
 `;

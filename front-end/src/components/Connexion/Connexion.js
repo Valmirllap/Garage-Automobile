@@ -9,6 +9,7 @@ export default function Connexion() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [rergisterMessage, setRegisterMessage] = useState("");
   const [loginStatus, setLoginStatus] = useState(false);
 
   Axios.defaults.withCredentials = true;
@@ -25,6 +26,7 @@ export default function Connexion() {
         localStorage.setItem("token", response.data.token);
         setLoginStatus(true);
         setMessage("");
+        setRegisterMessage("");
 
         setTimeout(() => {
           const isAdmin = response.data.result.isAdmin;
@@ -44,9 +46,13 @@ export default function Connexion() {
       if (response.data.loggedIn === true) {
         setMessage(
           <div>
-            <p>You're still connected</p>
-            <Link to="/dashboard">Go to the dashBoard</Link>
+            <p>Vous êtes toujours connecté</p>
+            <Link to="/dashboard">Aller au dashBoard</Link>
           </div>
+        )
+      } if (response.data.isAdmin === 1) {
+        setRegisterMessage(
+            <Link to="/register">Inscription employés</Link>
         )
       }
     });
@@ -97,7 +103,7 @@ export default function Connexion() {
 
           <ConnectButton onClick={login}>Se connecter</ConnectButton>
           {loginStatus && <AuthButton type="button" onClick={userAuth}>Cliquez pour Authentification</AuthButton>}
-          <ErrorMessage>{message}</ErrorMessage>
+          <ErrorMessage>{message}{rergisterMessage}</ErrorMessage>
         </Form>
       </ContainerInfoConnexion>
     </ContainerConnexion>

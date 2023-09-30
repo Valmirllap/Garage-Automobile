@@ -6,13 +6,15 @@ import { FaTwitterSquare } from "react-icons/fa"
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Axios from 'axios';
-import SideBar from './SideBar'
+import SideBar from './SideBar';
+import AccesDenied from '../hook/AccesDenied';
 
 export default function FooterDashboard() {
   const [dataDB, setDataDB] = useState([]);
   const [open, setOpen] = useState("");
   const [logged, setLogged] = useState(false);
   const [admin, setAdmin] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     Axios.get('http://localhost:3002/get/opening').then((response) => {
@@ -39,13 +41,18 @@ export default function FooterDashboard() {
       .catch((error) => {
         console.log(error);
       })
+      .finally(() => {
+        setLoading(false);
+      })
   })
+
+  if(loading) {
+    return null;
+  }
 
   if (!logged || !admin) {
     return (
-      <ErrorContainer>
-        <Denied>Accès refusé ! Vous n'êtes pas administrateur.</Denied>
-      </ErrorContainer>
+      <AccesDenied/>
     )
   }
 
@@ -206,17 +213,4 @@ const InputChange = styled.input`
   @media screen and (max-width: 768px){
     font-size: 13px;
   }
-`;
-
-
-const ErrorContainer = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-width: 100%;
-background-color: rgba(255, 50, 50, 0.8);
-`;
-const Denied = styled.h1`
-color: #242425;
-font-size: 32px;
 `;
