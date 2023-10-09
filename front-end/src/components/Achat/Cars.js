@@ -1,15 +1,23 @@
 import styled from "styled-components";
-import caracteristicsCar from "../UI/CarsData/CarsData.json"
 import FilterSlider from "./FilterSlider";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Axios from "axios";
 
 
 export default function Cars() {
 
+  const [carInfo, setCarInfo] = useState([]);
   const [kilometerRange, setKilometerRange] = useState([0, 250000]);
   const [priceRange, setPriceRange] = useState([2000, 150000]);
   const [yearRange, setYearRange] = useState([2000, 2023]);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3002/get/carinfo")
+    .then((response) => {
+      setCarInfo(response.data);
+    })
+  }, [])
 
   const handleChange = (setValue) => (event, newValue) => {
     setValue(newValue)
@@ -19,7 +27,7 @@ export default function Cars() {
   };
 
   const filterCars = () => {
-    return caracteristicsCar.filter((car) => {
+    return carInfo.filter((car) => {
       return (
         car.miles >= kilometerRange[0] &&
         car.miles <= kilometerRange[1] &&

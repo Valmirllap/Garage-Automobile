@@ -1,18 +1,27 @@
 import styled from "styled-components";
-import EquipmentData from "../UI/equipementData/equipementData.json";
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Axios from "axios";
 
 export default function Equipement() {
   const { id } = useParams();
 
-  const equipment = EquipmentData.equipmentCar.find((item) => item.id === id);
+  const [equipment1, setEquipment1] = useState([]);
+
+  useEffect(() => {
+    Axios.get(`http://localhost:3002/get/equipment/${id}`)
+    .then((response) => {
+      setEquipment1(response.data.equipment);
+    })
+  }, [id]);
+
   return (
     <div>
-      {equipment ? (
+      {equipment1.length > 0 ? (
       <WrapperEquipment>
         <TitleEquipment>Equipement</TitleEquipment>
         <ul>
-        {equipment.contentLi.map((item) => (
+        {equipment1.map((item) => (
           <Item key={item.id}><b>{item.li}</b></Item>
         ))}
         </ul>

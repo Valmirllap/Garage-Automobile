@@ -39,6 +39,8 @@ body{
 & b {
   font-weight: 600;
 }
+
+
 `;
 
 export default GlobalStyle;

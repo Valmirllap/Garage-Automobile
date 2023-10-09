@@ -44,6 +44,13 @@ commentsRoute(app);
 const scheduleRoute = require("./routes/schedule");
 scheduleRoute(app);
 
+// ========= SERVER-SIDE FOR EQUIPMENTS =========
+const EquipmentsRoute = require("./routes/equipmentCar");
+EquipmentsRoute(app);
+
+// ========= SERVER-SIDE FOR CAR DATA INFO =========
+const CarsInfoRoute = require("./routes/carDataInfo");
+CarsInfoRoute(app);
 
 // ========= LISTENNING SERVER =========
 app.listen(3002, () => {

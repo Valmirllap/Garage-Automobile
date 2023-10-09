@@ -9,9 +9,9 @@ function SideBar() {
       <SidebarList>
         {SidebarData.map((value, key) => {
           return (
-            <Link to={value.link}>
+            <Link  key={value.id} to={value.link}>
               <RowList
-                key={key}
+                key={value.id}
                 id={window.location.pathname === value.link ? "active" : ""}
               >
                 <Icon>{value.icon}</Icon>
