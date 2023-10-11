@@ -27,4 +27,4 @@ function equipmentGet(req, res) {
   });
 }
 
-module.exports = { equipmentGet }
+module.exports = { equipmentGet };

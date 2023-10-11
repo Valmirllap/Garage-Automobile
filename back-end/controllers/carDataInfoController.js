@@ -10,15 +10,7 @@ const dbCarData = mysql.createConnection({
 
 // ==================== CREATE CAR DATA ====================
 function carDataInfoPost(req, res) {
-  const image = req.body.image;
-  const car = req.body.car;
-  const title = req.body.title;
-  const year = req.body.year;
-  const gas = req.body.gas;
-  const miles = req.body.miles;
-  const price = req.body.price;
-  const link = req.body.link;
-  const picsLink = req.body.picsLink;
+  const { image, car, title, year, gas, miles, price, link, picsLink } = req.body;
   const sqlInsert = "INSERT INTO `info_cars` (image ,car, title, year, gas, miles, price, link, picsLink) VALUES (?,?,?,?,?,?,?,?,?);"
 
   dbCarData.query(sqlInsert, [image, car, title, year, gas, miles, price, link, picsLink], (err, result) => {
@@ -41,9 +33,9 @@ function carDataInfoGet(req, res) {
 }
 
 // ==================== UPDATE CAR DATA ====================
-function carDataInfoUpdate (req, res) {
+function carDataInfoUpdate(req, res) {
   const { id } = req.params;
-  const { image, car, title, year, gas, miles, price, link, picsLink} = req.body;
+  const { image, car, title, year, gas, miles, price, link, picsLink } = req.body;
 
   const sqlUpdate = "UPDATE `info_cars` SET ? WHERE id = ?";
 
@@ -70,7 +62,7 @@ function carDataInfoUpdate (req, res) {
 
 // ==================== DELETE CAR DATA ====================
 
-function carDataInfoDelete (req, res) {
+function carDataInfoDelete(req, res) {
   const id = req.params.id;
   const sqlDelete = "DELETE FROM `info_cars` WHERE id = ?"
 
