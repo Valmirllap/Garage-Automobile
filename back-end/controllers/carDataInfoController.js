@@ -10,10 +10,10 @@ const dbCarData = mysql.createConnection({
 
 // ==================== CREATE CAR DATA ====================
 function carDataInfoPost(req, res) {
-  const { image, car, title, year, gas, miles, price, link, picsLink } = req.body;
-  const sqlInsert = "INSERT INTO `info_cars` (image ,car, title, year, gas, miles, price, link, picsLink) VALUES (?,?,?,?,?,?,?,?,?);"
+  const { image, car, title, year, gas, miles, price, link, picsLink, dashboardLink } = req.body;
+  const sqlInsert = "INSERT INTO `info_cars` (image, car, title, year, gas, miles, price, link, picsLink, dashboardLink) VALUES (?,?,?,?,?,?,?,?,?,?);"
 
-  dbCarData.query(sqlInsert, [image, car, title, year, gas, miles, price, link, picsLink], (err, result) => {
+  dbCarData.query(sqlInsert, [image, car, title, year, gas, miles, price, link, picsLink, dashboardLink], (err, result) => {
     if (err) {
       res.send({ message: "Erreur veuillez réessayer" });
     } else {
@@ -35,7 +35,7 @@ function carDataInfoGet(req, res) {
 // ==================== UPDATE CAR DATA ====================
 function carDataInfoUpdate(req, res) {
   const { id } = req.params;
-  const { image, car, title, year, gas, miles, price, link, picsLink } = req.body;
+  const { image, car, title, year, gas, miles, price, link, picsLink, dashboardLink } = req.body;
 
   const sqlUpdate = "UPDATE `info_cars` SET ? WHERE id = ?";
 
@@ -49,6 +49,7 @@ function carDataInfoUpdate(req, res) {
   if (price) updateFields.price = price;
   if (link) updateFields.link = link;
   if (picsLink) updateFields.picsLink = picsLink;
+  if(dashboardLink) updateFields.dashboardLink = dashboardLink;
 
 
   dbCarData.query(sqlUpdate, [updateFields, id], (err, result) => {

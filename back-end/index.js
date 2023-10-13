@@ -56,6 +56,10 @@ CarsInfoRoute(app);
 const carsPicturesRoute = require("./routes/carPics");
 carsPicturesRoute(app);
 
+// ========= SERVER-SIDE FOR SMALL CAR DETAILS =========
+const smallDetailsRoute = require("./routes/carSmallDetails");
+smallDetailsRoute(app);
+
 // ========= LISTENNING SERVER =========
 app.listen(3002, () => {
   console.log("running server")

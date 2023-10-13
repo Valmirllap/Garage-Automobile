@@ -8,7 +8,7 @@ function carDataInfoRoute(app) {
   // ============ ROUTE: READ COMMENTS ============
   app.get("/get/carinfo", carDataInfoGet);
 
-  // ============ ROUTE: DELETE COMMENTS ============
+  // ============ ROUTE: UPDATE COMMENTS ============
   app.put("/update/carinfo/:id", carDataInfoUpdate);
 
   // ============ ROUTE: DELETE COMMENTS ============

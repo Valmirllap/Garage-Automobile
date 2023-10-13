@@ -8,6 +8,20 @@ const dbEquipments_data = mysql.createConnection({
   database: 'equipments_data',
 });
 
+// ==================== CREATE EQUIPMENTS ====================
+function equipmentCreate(req, res) {
+  const { car_model_id, li } = req.body;
+  const sqlInsert = "INSERT INTO `equipments` (car_model_id, li) VALUES (?,?);"
+
+  dbEquipments_data.query(sqlInsert, [car_model_id, li], (err, result) => {
+    if (err) {
+      res.send({ message: "Erreur veuillez réessayer" });
+    } else {
+      res.send({ message: "Nouvelle Equipement ajoutée" });
+    }
+  })
+}
+
 // ==================== READ EQUIPMENTS ====================
 function equipmentGet(req, res) {
   const carModelId = req.params.car_model_id;
@@ -27,4 +41,38 @@ function equipmentGet(req, res) {
   });
 }
 
-module.exports = { equipmentGet };
+// ==================== UPDATE EQUIPMENTS ====================
+function equipmentUpdate(req, res) {
+  const { id } = req.params;
+  const { car_model_id, li } = req.body;
+
+  const sqlUpdate = "UPDATE `equipments` SET ? WHERE id = ?";
+
+  const updateFields = {};
+  if (car_model_id) updateFields.car_model_id = car_model_id;
+  if (li) updateFields.li = li;
+
+  dbEquipments_data.query(sqlUpdate, [updateFields, id], (err, result) => {
+    if (err) {
+      res.send({ message: "Erreur veuillez réessayer" });
+    } else {
+      res.send({ message: "Mise à jour de l'equipement" });
+    }
+  })
+}
+
+// ==================== DELETE EQUIPMENTS ====================
+function equipmentDelete(req, res) {
+  const id = req.params.id;
+  const sqlDelete = "DELETE FROM `equipments` WHERE id = ?"
+
+  dbEquipments_data.query(sqlDelete, id, (err, result) => {
+    if (err) {
+      res.send({ message: "Erreur veuillez réessayer" });
+    } else {
+      res.send({ message: "equipement supprimer" });
+    }
+  })
+}
+
+module.exports = { equipmentCreate, equipmentGet, equipmentUpdate, equipmentDelete };
