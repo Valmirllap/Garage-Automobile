@@ -61,25 +61,27 @@ export default function SmallDetails() {
     { id: 5, li: 'Kilométrage :', value: content?.miles },
     { id: 6, li: 'Classe d\'émission: / ' },
   ];
-return (
-  <div>
-  {content ?
-      <WrapperDetail>
-        <Img src={content.image} alt={content.alt} />
-        <ShortDetail>
-          <ul>
-            {items.map((item) => (
-              <InformationsCar key={item.id}><b>{item.li}</b> {item.value}</InformationsCar>
-            ))}
-          </ul>
-          <Form>
-            <Link to='tel:+33123456789'><ButtonPhone className="btn">Téléphone</ButtonPhone></Link>
-            <Link to='/contactez-nous'><ButtonContact className="btn">Contactez-nous</ButtonContact></Link>
-          </Form>
-        </ShortDetail>
-      </WrapperDetail> : <p>Erreur 404: Cette page n'existe pas!</p>}
-    </div>
-);
+  return (
+    <Wrapper>
+      {content ?
+        <WrapperDetail>
+          <Img src={content.image} alt={content.alt} />
+          <ShortDetail>
+            <ul>
+              {items.map((item) => (
+                <InformationsCar key={item.id}>
+                  <b>{item.li}</b> {item.value}
+                </InformationsCar>
+              ))}
+            </ul>
+            <Form>
+              <Link to='tel:+33123456789'><ButtonPhone className="btn">Téléphone</ButtonPhone></Link>
+              <Link to='/contactez-nous'><ButtonContact className="btn">Contactez-nous</ButtonContact></Link>
+            </Form>
+          </ShortDetail>
+        </WrapperDetail> : <p>Erreur 404: Cette page n'existe pas!</p>}
+    </Wrapper>
+  );
 };
 
 // ==============================================================================
@@ -87,6 +89,8 @@ return (
 // ============================== STYLED-COMPONENT ==============================
 // ==============================================================================
 // ==============================================================================
+
+const Wrapper = styled.div``;
 
 const WrapperDetail = styled.div`
 display: flex;

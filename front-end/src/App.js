@@ -14,6 +14,7 @@ import Error from './components/ErrorPage';
 import AccueilDashboard from './components/DashBoard/AccueilDashboard';
 import AchatDashboard from './components/DashBoard/AchatDashboard';
 import FooterDashboard from './components/DashBoard/FooterDashboard';
+import DashBoardCarDetail from './components/DashBoardCarDetails';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route element={<Error />} path='*' />
           <Route element={<FooterDashboard />} path='/dashboard/footer' />
+          <Route element={<DashBoardCarDetail/>} path='/dashboard/achat/details/:id' />
           <Route element={<AchatDashboard />} path='/dashboard/achat' />
           <Route element={<AccueilDashboard />} path='/dashboard/accueil' />
           <Route element={<DashBoard />} path='/dashboard' />

@@ -14,11 +14,13 @@ export default function AddCarForm() {
 
   const [urlLink, setUrlLink] = useState('/achat/details/');
   const [picsLink, setPicsLink] = useState('/achat/pics/');
+  const [dashboardUrlLink, setDashboardUrlLink] = useState('/dashboard/achat/details/');
   const handleInputsChange = (e) => {
     const newValue = e.target.value;
     setUrlLink(newValue);
     setPicsLink('/achat/pics/' + newValue.slice('/achat/details/'.length)); // if we don't slice then it will add /achat/details/ 
     setCarPicsName(newValue.slice('/achat/details/'.length));
+    setDashboardUrlLink('/dashboard/achat/details/' + newValue.slice('/achat/details/'.length))
   }
 
   const [carPicsName, setCarPicsName] = useState();
@@ -128,6 +130,11 @@ export default function AddCarForm() {
           type='text'
           name='picsLink'
           value={picsLink}
+          readOnly />
+          <Input
+          type='text'
+          name='dashboarLink'
+          value={dashboardUrlLink}
           readOnly />
 
         <ButtonSend>Envoyer</ButtonSend>

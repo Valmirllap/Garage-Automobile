@@ -16,7 +16,7 @@ export default function Equipement() {
   }, [id]);
 
   return (
-    <div>
+    <Wrapper>
       {equipment1.length > 0 ? (
       <WrapperEquipment>
         <TitleEquipment>Equipement</TitleEquipment>
@@ -27,9 +27,17 @@ export default function Equipement() {
         </ul>
       </WrapperEquipment>
       ): null}
-    </div>
+    </Wrapper>
   );
 };
+
+// ==============================================================================
+// ==============================================================================
+// ============================== STYLED-COMPONENT ==============================
+// ==============================================================================
+// ==============================================================================
+
+const Wrapper = styled.div``;
 
 const WrapperEquipment = styled.div`
 margin: 25px 0 25px 0;

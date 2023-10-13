@@ -134,7 +134,7 @@ export default function AchatDashboard() {
                       const newValue = parseInt(e.target.value);
                       setPrice(newValue);
                     }} />
-                  <Link to={value.link}>
+                  <Link to={value.dashboardLink}>
                     <ButtonCard className="font">Détails</ButtonCard>
                   </Link>
                 </Price>
