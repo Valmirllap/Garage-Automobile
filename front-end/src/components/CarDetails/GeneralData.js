@@ -1,38 +1,52 @@
 import styled from "styled-components";
-import generalData from "../UI/carGeneralData/generalData.json";
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Axios from "axios";
 
 export default function GeneralData() {
   const { id } = useParams();
 
-  const content = generalData.find(item => item.id === id);
+  const [serverData, setServerData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // =========================== READ GENERAL DATA ===========================
+  useEffect(() => {
+    Axios.get(`http://localhost:3002/dataone/get/${id}`)
+      .then((response) => {
+        setServerData(response.data.generalDataOne);
+      })
+      .finally(() => {
+        setLoading(false);
+      })
+  }, [id]);
 
   const items = [
-    { id: 1, li: "Condition véhicule :", value: content?.state },
-    { id: 2, li: "Première immat.:", value: content?.registration },
-    { id: 3, li: "Kilométrage : ", value: content?.miles },
-    { id: 4, li: "Carburant :", value: content?.fuel },
-    { id: 5, li: "Boite de vitesse :", value: content?.gearbox },
-    { id: 6, li: "Puissance :", value: content?.horsePower },
-    { id: 7, li: "Cylindrée :", value: content?.cylinder },
-    { id: 8, li: "Nombre de cylindre :", value: content?.nbCylinder },
-    { id: 9, li: "Emissions de CO2 :", value: content?.co2 },
+    { id: 1, li: "Condition véhicule :", value: serverData[0]?.state, name: 'state' },
+    { id: 2, li: "Première immat.:", value: serverData[0]?.registration, name: 'registration' },
+    { id: 3, li: "Kilométrage : ", value: serverData[0]?.miles, name: 'miles' },
+    { id: 4, li: "Carburant :", value: serverData[0]?.fuel, name: 'fuel' },
+    { id: 5, li: "Boite de vitesse :", value: serverData[0]?.gearbox, name: 'gearbox' },
+    { id: 6, li: "Puissance :", value: serverData[0]?.horsePower, name: 'horsePower' },
+    { id: 7, li: "Cylindrée :", value: serverData[0]?.cylinder, name: 'cylinder' },
+    { id: 8, li: "Nombre de cylindre :", value: serverData[0]?.nbCylinder, name: 'nbCylinder' },
   ];
 
   const items2 = [
-    { id: 10, li: "Classe d'émission :", value: content?.emission },
-    { id: 11, li: "Carroserie :", value: content?.body },
-    { id: 12, li: "Couleur :", value: content?.color },
-    { id: 13, li: "Nombre de portes :", value: content?.nbDoor },
-    { id: 14, li: "Voiture endommagée :", value: content?.hitCar },
-    { id: 15, li: "Contrôle techn. jusqu'au :", value: content?.techCheck },
-    { id: 16, li: "Car-Pass :", value: content?.carPass },
-
+    { id: 1, li: "Emissions de CO2 :", value: serverData[0]?.co2, name: 'co2' },
+    { id: 2, li: "Classe d'émission :", value: serverData[0]?.emission, name: 'emission' },
+    { id: 3, li: "Carroserie :", value: serverData[0]?.body, name: 'body' },
+    { id: 4, li: "Couleur :", value: serverData[0]?.color, name: 'color' },
+    { id: 5, li: "Nombre de portes :", value: serverData[0]?.nbDoor, name: 'nbDoor' },
+    { id: 6, li: "Voiture endommagée :", value: serverData[0]?.hitCar, name: 'hitCar' },
+    { id: 7, li: "Contrôle techn. jusqu'au :", value: serverData[0]?.techCheck, name: 'techCheck' },
+    { id: 8, li: "Car-Pass :", value: serverData[0]?.carPass, name: 'carPass' },
   ]
 
   return (
     <div>
-      {content ? (
+      {loading ? (
+        null
+      ) : serverData[0] ? (
         <WrapperGeneralData>
           <TitleGeneralData>Données générales:</TitleGeneralData>
           <ItemContainer>
@@ -51,7 +65,7 @@ export default function GeneralData() {
               ))}
             </ul>
           </ItemContainer>
-        </WrapperGeneralData> ) : null}
+        </WrapperGeneralData>) : null}
     </div>
   );
 };

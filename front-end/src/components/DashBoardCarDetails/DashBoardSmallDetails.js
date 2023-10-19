@@ -26,9 +26,6 @@ export default function DashBoardSmallDetails() {
       .then((response) => {
         setSmallDetails(response.data.smallDetail);
       })
-      .catch((error) => {
-        console.error(error);
-      })
       .finally(() => {
         setLoading(false);
       })
@@ -44,12 +41,11 @@ export default function DashBoardSmallDetails() {
       miles: miles,
       image: image,
       alt: alt,
-
     });
     window.location.reload();
   }
 
-  // =========================== DELETE EQUIPMENT ===========================
+  // =========================== DELETE SMALL DETAILS ===========================
   const deleteSmallDetails = (id) => {
     Axios.delete(`http://localhost:3002/smalldetails/delete/${id}`);
     window.location.reload();
@@ -57,7 +53,6 @@ export default function DashBoardSmallDetails() {
 
   return (
     <div>
-      <AddSmallDetailsForm />
       {loading ? (
         <p>loading...</p>
       ) : smallDetails.length > 0 ?
@@ -146,7 +141,12 @@ export default function DashBoardSmallDetails() {
               </ShortDetail>
             </Wrapper>
           ))}
-        </WrapperDetail> : <ErrorPage error="Erreur: Cette page n'existe pas. Veuillez remplir le forumlaire ci-dessus" />}
+        </WrapperDetail> : 
+        <div>
+          <AddSmallDetailsForm />
+          <ErrorPage error="Les détails de la voiture n'existe pas. Veuillez remplir le forumlaire ci-dessus" />
+        </div>
+        }
     </div>
   );
 };
@@ -182,7 +182,7 @@ justify-content: space-between;
 `;
 
 const WrapperImg = styled.div`
-    margin-left: 25px;
+margin-left: 25px;
 `;
 
 const Img = styled.img`
@@ -222,7 +222,7 @@ color: #F5CB5C;
 width: 150px;
 &:hover {
   background-color: black;
-  color: yellow;
+  color: gold;
 }
 @media screen and (max-width: 768px) {
   margin-bottom: 15px;

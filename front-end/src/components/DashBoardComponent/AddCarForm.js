@@ -50,6 +50,7 @@ export default function AddCarForm() {
 
   return (
     <Wrapper>
+      <H1>Formulaire pour ajouter une voiture</H1>
       <Form onSubmit={HandleSubmitCar}>
         <Label>Insérer l'url de l'image</Label>
         <Input
@@ -120,6 +121,7 @@ export default function AddCarForm() {
           }}
           placeholder="Insérer le prix de la voiture" />
 
+
         <Label>Insérer le modèle de la voiture</Label>
         <Input
           type='text'
@@ -127,11 +129,13 @@ export default function AddCarForm() {
           value={urlLink}
           onChange={handleInputsChange} />
         <Input
+          className='hide'
           type='text'
           name='picsLink'
           value={picsLink}
           readOnly />
           <Input
+          className='hide'
           type='text'
           name='dashboarLink'
           value={dashboardUrlLink}
@@ -140,6 +144,7 @@ export default function AddCarForm() {
         <ButtonSend>Envoyer</ButtonSend>
       </Form>
 
+      <H1>Formulaire pour insérer les photos afin de créer une galerie</H1>
       <Form>
         <Label>Insérer le modèle de la voiture</Label>
         <Input
@@ -173,6 +178,13 @@ export default function AddCarForm() {
 
 const Wrapper = styled.div`
 
+`;
+
+const H1 = styled.h1`
+font-family: Libre Baskerville;
+font-size: 25px;
+font-weight: 700;
+margin-top: 20px;
 `;
 
 const Form = styled.form`

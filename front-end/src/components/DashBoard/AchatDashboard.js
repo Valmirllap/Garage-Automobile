@@ -37,6 +37,7 @@ export default function AchatDashboard() {
       miles: miles,
       price: price,
     })
+    window.location.reload();
   }
 
   // =========================== DELETE CAR ===========================
@@ -53,27 +54,24 @@ export default function AchatDashboard() {
           setLogged(true);
         }
       })
-      .catch((error) => {
-        console.log(error);
-      })
       .finally(() => {
         setLoading(false);
       })
   }, []);
 
-  if(loading){
+  if (loading) {
     return null;
   }
 
   if (!logged) {
     return (
-      <AccesDenied/>
+      <AccesDenied />
     );
   }
   return (
     <Wrapper>
       <SideBar />
-      <AddCarForm/>
+      <AddCarForm />
 
       {carInfo.map((value) => {
         return (

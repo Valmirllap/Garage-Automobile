@@ -29,7 +29,6 @@ function smallDetailsGet(req, res) {
 
   dbCarSmallDetails.query(sqlSelect, [carId], (err, result) => {
     if (err) {
-      console.error(err);
       res.status(500).send("Erreur les données non pas su être récupéré")
     } else {
       const smallDetailMain = {

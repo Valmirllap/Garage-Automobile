@@ -75,13 +75,15 @@ width: 100%;
 
 & .slider {
   position: relative;
-  height: 160vh;
+  width: 60%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   @media screen and (max-width: 768px){
     position: static;
     height: 100vh;
+    width:100%;
   }
   @media screen and (max-width: 576px){
     position: static;

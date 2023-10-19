@@ -11,6 +11,7 @@ export default function DashBoard() {
   const [logged, setLogged] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // =========================== ACCES TO THE PAGE /DASHBOARD ===========================
   useEffect(() => {
     Axios.get("http://localhost:3002/login", { withCredentials: true })
       .then((response) => {

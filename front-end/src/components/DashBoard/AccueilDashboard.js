@@ -18,13 +18,6 @@ export default function AccueilDashboard() {
   const [logged, setLogged] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // =========================== GET COMMENTS ===========================
-  useEffect(() => {
-    Axios.get('http://localhost:3002/api/get').then((response) => {
-      setComments(response.data);
-    })
-  }, [])
-
   // =========================== CREATE COMMENTS ===========================
   const handleCommentSubmit = (e) => {
     e.preventDefault();
@@ -47,11 +40,12 @@ export default function AccueilDashboard() {
     }
   };
 
-  // =========================== DELETE COMMENTS ===========================
-  const deleteComment = (id) => {
-    Axios.delete(`http://localhost:3002/api/delete/${id}`);
-    window.location.reload();
-  }
+  // =========================== READ COMMENTS ===========================
+  useEffect(() => {
+    Axios.get('http://localhost:3002/api/get').then((response) => {
+      setComments(response.data);
+    })
+  }, [])
 
   // =========================== UPDATE COMMENTS ===========================
   const updateComment = (id) => {
@@ -60,6 +54,12 @@ export default function AccueilDashboard() {
       id: id,
     });
     setUpdateReview("");
+    window.location.reload();
+  }
+
+  // =========================== DELETE COMMENTS ===========================
+  const deleteComment = (id) => {
+    Axios.delete(`http://localhost:3002/api/delete/${id}`);
     window.location.reload();
   }
 
@@ -91,14 +91,14 @@ export default function AccueilDashboard() {
 
   if (!logged) {
     return (
-      <AccesDenied/>
+      <AccesDenied />
     );
   }
 
   return (
     <Wrapper>
       <MainTitle text="Service réparation" />
-      <SideBar/>
+      <SideBar />
       <CardServices />
       <Comments>
         <Form onSubmit={handleCommentSubmit}>
@@ -120,7 +120,7 @@ export default function AccueilDashboard() {
             }}
             placeholder="Entrer votre avis"
             required
-            />
+          />
           <div>
             {[...Array(5)].map((start, index) => {
               const currentRating = index + 1;

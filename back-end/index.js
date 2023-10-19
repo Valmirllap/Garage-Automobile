@@ -60,6 +60,12 @@ carsPicturesRoute(app);
 const smallDetailsRoute = require("./routes/carSmallDetails");
 smallDetailsRoute(app);
 
+// ========= SERVER-SIDE FOR GENERAL DATA ONE =========
+const generalDataOneRoute = require("./routes/generalDataOne");
+generalDataOneRoute(app);
+
+
+
 // ========= LISTENNING SERVER =========
 app.listen(3002, () => {
   console.log("running server")

@@ -1,112 +1,62 @@
 import styled from "styled-components"
-import {useState} from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 
 export default function AddSmallDetailsForm() {
 
-  const {id} = useParams();
+  const { id } = useParams();
 
-  const [carId, setCardId] = useState(id);
-  const [state, setState] = useState();
-  const [firstReg, setFirstReg] = useState();
-  const [gearBox, setGearBox] = useState();
-  const [fuel, setFuel] = useState();
-  const [miles, setMiles] = useState();
-  const [image, setImage] = useState();
-  const [alt, setAlt] = useState();
+  const carId = id
+  const [state, setState] = useState('');
+  const [firstReg, setFirstReg] = useState('');
+  const [gearBox, setGearBox] = useState('');
+  const [fuel, setFuel] = useState('');
+  const [miles, setMiles] = useState('');
+  const [image, setImage] = useState('');
+  const [alt, setAlt] = useState('');
 
-    // =========================== CREATE EQUIPMENT ===========================
-    const handleSubmitSmallDetail = () => {
-      Axios.post(`http://localhost:3002/smalldetails/create/${id}`, {
-        car_id: carId,
-        state: state,
-        firstReg: firstReg,
-        gearbox: gearBox,
-        fuel: fuel,
-        miles: miles,
-        image: image,
-        alt: alt,
-      })
-    }
+  // =========================== CREATE SMALL DETAILS ===========================
+  const handleSubmitSmallDetail = () => {
+    Axios.post(`http://localhost:3002/smalldetails/create/${id}`, {
+      car_id: carId,
+      state: state,
+      firstReg: firstReg,
+      gearbox: gearBox,
+      fuel: fuel,
+      miles: miles,
+      image: image,
+      alt: alt,
+    })
+  }
 
   return (
     <div>
       <H1>Small Details Form</H1>
-      <FormAdd>
-
-        <Label>Insérer pour quel modèle de voiture</Label>
-        <Input
-          type='text'
-          name='carId'
-          value={carId}
-          onChange={(e) => {
-            setCardId(e.target.value);
-          }} />
+      <FormAdd onSubmit={handleSubmitSmallDetail}>
+        <Input className="hide" type='text' value={carId} readOnly />
 
         <Label>L'état de la voiture (occasion ou neuve)?</Label>
-        <Input
-          type='text'
-          name='state'
-          value={state}
-          onChange={(e) => {
-            setState(e.target.value);
-          }} />
+        <Input type='text' name='state' value={state} onChange={(e) => setState(e.target.value)} required />
 
         <Label>Date d'enregistrement?</Label>
-        <Input
-          type='text'
-          name='firstReg'
-          value={firstReg}
-          onChange={(e) => {
-            setFirstReg(e.target.value);
-          }} />
+        <Input type='text' name='firstReg' value={firstReg} onChange={(e) => setFirstReg(e.target.value)} required />
 
         <Label>Quel type de boite de vitesse?</Label>
-        <Input
-          type='text'
-          name='gearBox'
-          value={gearBox}
-          onChange={(e) => {
-            setGearBox(e.target.value);
-          }} />
+        <Input type='text' name='gearBox' value={gearBox} onChange={(e) => setGearBox(e.target.value)} required />
 
         <Label>Quel type de carburant?</Label>
-        <Input
-          type='text'
-          name='fuel'
-          value={fuel}
-          onChange={(e) => {
-            setFuel(e.target.value);
-          }} />
+        <Input type='text' name='fuel' value={fuel} onChange={(e) => setFuel(e.target.value)} required />
 
         <Label>Nombre de kilomètres?</Label>
-        <Input
-          type='text'
-          name='miles'
-          value={miles}
-          onChange={(e) => {
-            setMiles(e.target.value);
-          }} />
+        <Input type='text' name='miles' value={miles} onChange={(e) => setMiles(e.target.value)} required />
 
         <Label>Insérer l'image adéquat</Label>
-        <Input
-          type='text'
-          name='image'
-          value={image}
-          onChange={(e) => {
-            setImage(e.target.value);
-          }} />
+        <Input type='text' name='image' value={image} onChange={(e) => setImage(e.target.value)} required />
 
         <Label>Brève description de la voiture</Label>
-        <Input
-          type='text'
-          name='alt'
-          value={alt}
-          onChange={(e) => {
-            setAlt(e.target.value);
-          }} />
-        <ButtonSend onClick={handleSubmitSmallDetail}>Envoyer</ButtonSend>
+        <Input type='text' name='alt' value={alt} onChange={(e) => setAlt(e.target.value)} required />
+        <ButtonSend type="submit">Envoyer</ButtonSend>
       </FormAdd>
     </div>
   )

@@ -40,7 +40,9 @@ body{
   font-weight: 600;
 }
 
-
+& .hide{
+    display: none;
+  }
 `;
 
 export default GlobalStyle;
