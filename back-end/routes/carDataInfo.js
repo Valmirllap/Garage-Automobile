@@ -2,16 +2,16 @@ const { carDataInfoGet, carDataInfoPost, carDataInfoUpdate, carDataInfoDelete } 
 
 function carDataInfoRoute(app) {
 
-  // ============ ROUTE: CREATE COMMENTS ============
+  // ============ ROUTE: CREATE CAR INFO ============
   app.post("/post/carinfo", carDataInfoPost);
 
-  // ============ ROUTE: READ COMMENTS ============
+  // ============ ROUTE: READ CAR INFO ============
   app.get("/get/carinfo", carDataInfoGet);
 
-  // ============ ROUTE: UPDATE COMMENTS ============
+  // ============ ROUTE: UPDATE CAR INFO ============
   app.put("/update/carinfo/:id", carDataInfoUpdate);
 
-  // ============ ROUTE: DELETE COMMENTS ============
+  // ============ ROUTE: DELETE CAR INFO ============
   app.delete("/delete/carinfo/:id", carDataInfoDelete);
 }
 

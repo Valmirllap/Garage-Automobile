@@ -10,12 +10,39 @@ const dbgeneralDataOne = mysql.createConnection({
 
 // ==================== CREATE GENERAL DATA ONE ====================
 function generalDataOneCreate(req, res) {
-  const { car_id, state, registration, miles, fuel, gearbox, horsePower, cylinder, nbCylinder, co2, emission, body, color, nbDoor, hitCar, techCheck, carPass} = req.body;
-  const sqlInsert = "INSERT INTO `general_data_one` (car_id, state, registration, miles, fuel, gearbox, horsePower, cylinder, nbCylinder, co2, emission, body, color, nbDoor, hitCar, techCheck, carPass) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
+  const { 
+    car_id, 
+    state, 
+    registration, 
+    miles, 
+    fuel, 
+    gearbox, 
+    horsePower, 
+    cylinder, 
+    nbCylinder, 
+    co2, 
+    emission,
+    body, 
+    color, 
+    nbDoor, 
+    hitCar, 
+    techCheck, 
+    carPass
+  } = req.body;
+  
+  const sqlInsert = `INSERT INTO general_data_one (
+    car_id, state, registration, miles, fuel, gearbox, horsePower, cylinder, 
+    nbCylinder, co2, emission, body, color, nbDoor, hitCar, techCheck, carPass) 
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+  `
+  const values = [
+    car_id,state, registration, miles, fuel, gearbox, horsePower, cylinder, nbCylinder, 
+    co2, emission, body, color, nbDoor, hitCar, techCheck, carPass
+  ]
 
-  dbgeneralDataOne.query(sqlInsert, [car_id,state, registration, miles, fuel, gearbox, horsePower, cylinder, nbCylinder, co2, emission, body, color, nbDoor, hitCar, techCheck, carPass], (err, result) => {
+  dbgeneralDataOne.query(sqlInsert, values, (err, result) => {
     if (err) {
-      res.send({ message: err });
+      res.send({ message: "Erreur veuillez réessayer" });
     } else {
       res.send({ message: "Nouvelle donnée ajoutée" });
     }
@@ -77,7 +104,7 @@ function generalDataOneUpdate(req, res) {
   })
 }
 
-// ==================== DELETE EQUIPMENTS ====================
+// ==================== DELETE DATA ONE ====================
 function generalDataOneDelete(req, res) {
   const id = req.params.id;
   const sqlDelete = "DELETE FROM `general_data_one` WHERE id = ?"

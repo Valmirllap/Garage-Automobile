@@ -1,4 +1,4 @@
-const { equipmentCreate, equipmentGet, equipmentUpdate, equipmentDelete } = require("../controllers/equipmentCarController");
+const { equipmentCreate, equipmentGet, equipmentUpdate, equipmentDelete, allEquipmentDelete } = require("../controllers/equipmentCarController");
 
 function equipmentCarRoute(app) {
   // ============ ROUTE: READ EQUIPMENTS ============
@@ -12,6 +12,9 @@ function equipmentCarRoute(app) {
 
   // ============ ROUTE: DELETE EQUIPMENTS ============
   app.delete("/delete/equipment/:id", equipmentDelete);
+
+  // ============ ROUTE: DELETE ALL EQUIPMENTS ============
+  app.delete("/delete/allequipment/:car_model_id", allEquipmentDelete);
 }
 
 module.exports = equipmentCarRoute;

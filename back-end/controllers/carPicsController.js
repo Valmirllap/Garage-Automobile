@@ -8,7 +8,7 @@ const dbCarImg = mysql.createConnection({
   database: 'CarImg',
 });
 
-// ==================== CREATE COMMENTS ====================
+// ==================== CREATE PICS ====================
 function createCarPics(req, res) {
   const car_pics_name = req.body.car_pics_name;
   const url_img = req.body.url_img;
@@ -18,12 +18,12 @@ function createCarPics(req, res) {
     if (err) {
       res.send({ message: "Erreur, Veuillez réessayer" });
     } else {
-      res.send({ message: "Commentaire envoyé!" })
+      res.send({ message: "Vous venez d'ajouter d'une photo dans la galerie" })
     }
   })
 }
 
-// ==================== READ COMMENTS ====================
+// ==================== READ PICS ====================
 function getCarPics(req, res) {
   const carPicsName = req.params.car_pics_name;
   const sqlSelect = "SELECT * FROM `cars_pics` WHERE car_pics_name = ?";
@@ -42,10 +42,18 @@ function getCarPics(req, res) {
   });
 }
 
-// ==================== UPDATE COMMENTS ====================
+// ==================== DELETE PICS ====================
+function deleteCarPics(req, res) {
+  const car_pics_name = req.params.car_pics_name;
+  const sqlDelete = "DELETE FROM `cars_pics` WHERE car_pics_name = ?"
 
+  dbCarImg.query(sqlDelete, car_pics_name, (err, result) => {
+    if (err) {
+      res.send({ message: "Erreur veuillez réessayer" });
+    } else {
+      res.send({ message: "Galerie supprimer" });
+    }
+  })
+}
 
-// ==================== DELETE COMMENTS ====================
-
-
-module.exports = { createCarPics, getCarPics }
+module.exports = { createCarPics, getCarPics, deleteCarPics }

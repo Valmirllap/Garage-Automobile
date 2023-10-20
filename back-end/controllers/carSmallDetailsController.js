@@ -65,7 +65,7 @@ function smallDetailsUpdate(req, res) {
   })
 }
 
-// ==================== DELETE EQUIPMENTS ====================
+// ==================== DELETE SMALL DETAILS ====================
 function smallDetailsDelete(req, res) {
   const id = req.params.id;
   const sqlDelete = "DELETE FROM `small_details` WHERE id = ?"

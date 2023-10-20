@@ -1,17 +1,14 @@
-const { createCarPics, getCarPics } = require("../controllers/carPicsController");
+const { createCarPics, getCarPics, deleteCarPics } = require("../controllers/carPicsController");
 
 function carPicsRoute(app) {
-// ============ ROUTE: CREATE COMMENTS ============
+// ============ ROUTE: CREATE PICS ============
 app.post("/carpics/insert", createCarPics);
 
-// ============ ROUTE: READ COMMENTS ============
+// ============ ROUTE: READ PICS ============
 app.get("/carpics/get/:car_pics_name", getCarPics);
 
-// ============ ROUTE: UPDATE COMMENTS ============
-
-
-// ============ ROUTE: DELETE COMMENTS ============
-
+// ============ ROUTE: DELETE PICS ============
+app.delete("/carpics/delete/:car_pics_name", deleteCarPics)
 
 }
 

@@ -75,4 +75,18 @@ function equipmentDelete(req, res) {
   })
 }
 
-module.exports = { equipmentCreate, equipmentGet, equipmentUpdate, equipmentDelete };
+// ==================== DELETE ALL EQUIPMENTS ====================
+function allEquipmentDelete(req, res) {
+  const car_model_id = req.params.car_model_id;
+  const sqlDelete = "DELETE FROM `equipments` WHERE car_model_id = ?"
+
+  dbEquipments_data.query(sqlDelete, car_model_id, (err, result) => {
+    if (err) {
+      res.send({ message: "Erreur veuillez réessayer" });
+    } else {
+      res.send({ message: "Tout les équipements supprimer" });
+    }
+  })
+}
+
+module.exports = { equipmentCreate, equipmentGet, equipmentUpdate, equipmentDelete, allEquipmentDelete };
