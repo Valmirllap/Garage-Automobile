@@ -16,12 +16,14 @@ export default function FooterDashboard() {
   const [admin, setAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // =========================== READ SCHEDULE ===========================
   useEffect(() => {
-    Axios.get('http://localhost:3002/get/opening').then((response) => {
-      setDataDB(response.data);
-    })
+    Axios.get('http://localhost:3002/get/opening')
+      .then((response) => {
+        setDataDB(response.data);
+      })
   }, [])
-
+  // =========================== UPDATE SCHEDULE ===========================
   const updateOpeningTime = (id) => {
     Axios.put('http://localhost:3002/update/opening', {
       openingTime: open,
@@ -73,38 +75,38 @@ export default function FooterDashboard() {
     <Container>
       <SideBar />
       <Wrapper>
-          <ContainerTable>
-            <table>
-              <tbody>
-                <tr>
-                  <th>Location</th>
-                  <th>Menu</th>
-                  <th>Contact</th>
-                  <th>Horaire d'ouverture</th>
+        <ContainerTable>
+          <table>
+            <tbody>
+              <tr>
+                <th>Location</th>
+                <th>Menu</th>
+                <th>Contact</th>
+                <th>Horaire d'ouverture</th>
+              </tr>
+              {dataDB.map((value, index) => (
+                <tr key={index}>
+                  <td>{value.Location}</td>
+                  <td><Link className="menu" to={value.link}>{value.menu}</Link></td>
+                  {data.map((social) => {
+                    if (social.id === value.id) {
+                      return (
+                        <td key={social.id}>{social.contact}</td>
+                      )
+                    }
+                    return null
+                  })}
+                  <td className='update'>{value.openingTime}
+                    <InputChange type='text' defaultValue={value.openingTime} onChange={(e) => {
+                      setOpen(e.target.value)
+                    }} />
+                    <ButtonModify onClick={() => { updateOpeningTime(value.id) }}>Modifier</ButtonModify>
+                  </td>
                 </tr>
-                {dataDB.map((value, index) => (
-                    <tr key={index}>
-                      <td>{value.Location}</td>
-                      <td><Link className="menu" to={value.link}>{value.menu}</Link></td>
-                      {data.map((social) => {
-                        if (social.id === value.id) {
-                          return (
-                            <td key={social.id}>{social.contact}</td>
-                          )
-                        }
-                        return null
-                      })}
-                      <td className='update'>{value.openingTime}
-                        <InputChange type='text' defaultValue={value.openingTime} onChange={(e) => {
-                          setOpen(e.target.value)
-                        }} />
-                        <ButtonModify onClick={() => { updateOpeningTime(value.id) }}>Modifier</ButtonModify>
-                      </td>
-                    </tr>
-                ))}
-              </tbody>
-            </table>
-          </ContainerTable>
+              ))}
+            </tbody>
+          </table>
+        </ContainerTable>
       </Wrapper>
     </Container>
   )

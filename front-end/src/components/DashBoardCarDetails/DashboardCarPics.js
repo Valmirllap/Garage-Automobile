@@ -1,17 +1,17 @@
 import styled from "styled-components";
-
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 
-export default function SlidePics() {
+export default function DashboardCarPics() {
   const { id } = useParams();
 
   const [carPictures, setCarsPictures] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // =========================== READ PICS ===========================
   useEffect(() => {
     Axios.get(`http://localhost:3002/carpics/get/${id}`)
       .then((response) => {
@@ -21,6 +21,12 @@ export default function SlidePics() {
         setLoading(false);
       });
   }, [id])
+
+  // =========================== DELETE PICs ===========================
+  const deleteCarPics = (id) => {
+    Axios.delete(`http://localhost:3002/carpics/delete/${id}`);
+    window.location.reload();
+  }
 
   const [current, setCurrent] = useState(0);
   const lenght = carPictures ? carPictures.length : 0;
@@ -37,22 +43,23 @@ export default function SlidePics() {
       {loading ? (
         <p>loading...</p>
       ) : lenght > 0 ? (
-
-        <section className="slider">
-          <FaArrowAltCircleLeft className="arrows left-arrow" onClick={prevSlide} />
-          <FaArrowAltCircleRight className="arrows right-arrow" onClick={nextSlide} />
-          {carPictures.map((pic, index) => {
-            return (
-              <div className={index === current ? 'slide active' : 'slide'} key={index}>
-                {index === current && (
-                  <img className="image" src={pic.url_img} alt={pic.id} />
-                )}
-              </div>
-            )
-          })}
-        </section>
-
-      ) : (<Error>Erreur: Cette page n'existe pas</Error>)}
+        <div>
+          <section className="slider">
+            <FaArrowAltCircleLeft className="arrows left-arrow" onClick={prevSlide} />
+            <FaArrowAltCircleRight className="arrows right-arrow" onClick={nextSlide} />
+            {carPictures.map((pic, index) => {
+              return (
+                <div className={index === current ? 'slide active' : 'slide'} key={index}>
+                  {index === current && (
+                    <img className="image" src={pic.url_img} alt={pic.id} />
+                  )}
+                </div>
+              )
+            })}
+          </section>
+          <ButtonChanges onClick={() => { deleteCarPics(carPictures[0].car_pics_name) }}>Supprimer toute la galerie</ButtonChanges>
+        </div>
+      ) : (<Error>Pas de galerie disponible: veuillez compléter le formulaire <Link to='/dashboard/achat'>ici</Link></Error>)}
     </Wrapper>
   );
 };
@@ -123,9 +130,16 @@ width: 100%;
 }
 `;
 
+const ButtonChanges = styled.button`
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 15px;
+`;
+
 const Error = styled.p`
   font-family: libre baskerville;
   font-size: 32px;
   font-weight: 600;
+  padding: 10px;
   color: #ec1329;
 `;

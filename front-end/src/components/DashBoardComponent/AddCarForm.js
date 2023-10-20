@@ -20,7 +20,7 @@ export default function AddCarForm() {
     setUrlLink(newValue);
     setPicsLink('/achat/pics/' + newValue.slice('/achat/details/'.length)); // if we don't slice then it will add /achat/details/ 
     setCarPicsName(newValue.slice('/achat/details/'.length));
-    setDashboardUrlLink('/dashboard/achat/details/' + newValue.slice('/achat/details/'.length))
+    setDashboardUrlLink('/dashboard/achat/details/' + newValue.slice('/achat/details/'.length));
   }
 
   const [carPicsName, setCarPicsName] = useState();
@@ -38,6 +38,7 @@ export default function AddCarForm() {
       price: price,
       link: urlLink,
       picsLink: picsLink,
+      dashboardLink: dashboardUrlLink,
     })
   }
 // =========================== CREATE PICS ===========================
@@ -51,7 +52,7 @@ export default function AddCarForm() {
   return (
     <Wrapper>
       <H1>Formulaire pour ajouter une voiture</H1>
-      <Form onSubmit={HandleSubmitCar}>
+      <Form>
         <Label>Insérer l'url de l'image</Label>
         <Input
           type='text'
@@ -141,7 +142,7 @@ export default function AddCarForm() {
           value={dashboardUrlLink}
           readOnly />
 
-        <ButtonSend>Envoyer</ButtonSend>
+        <ButtonSend onClick={HandleSubmitCar}>Envoyer</ButtonSend>
       </Form>
 
       <H1>Formulaire pour insérer les photos afin de créer une galerie</H1>

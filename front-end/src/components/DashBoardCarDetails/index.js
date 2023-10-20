@@ -5,6 +5,7 @@ import DashBoardGeneralData from './DashBoardGeneralData';
 import DashBoardEquipment from './DashBoardEquipment';
 import Axios from 'axios'
 import AccesDenied from '../hook/AccesDenied';
+import DashboardCarPics from './DashboardCarPics';
 
 export default function DashBoardCarDetail() {
 
@@ -38,6 +39,7 @@ export default function DashBoardCarDetail() {
       <DashBoardSmallDetails />
       <DashBoardGeneralData />
       <DashBoardEquipment />
+      <DashboardCarPics/>
     </Wrapper>
   )
 }

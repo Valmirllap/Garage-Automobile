@@ -56,7 +56,7 @@ export default function DashBoardGeneralData() {
     window.location.reload();
   }
 
-  // =========================== DELETE SMALL DETAILS ===========================
+  // =========================== DELETE GENERAL DATA ===========================
   const deleteGeneralData = (id) => {
     Axios.delete(`http://localhost:3002/dataone/delete/${id}`);
     window.location.reload();

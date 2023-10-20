@@ -10,10 +10,10 @@ export default function DashBoardEquipment() {
   const [equipment1, setEquipment1] = useState([]);
   const [modifyEquip, setModifyEquip] = useState();
   const [carModelId, setCarModelId] = useState(id);
-  
-  const[loading, setLoading] = useState(true);
 
-// =========================== CREATE EQUIPMENT ===========================
+  const [loading, setLoading] = useState(true);
+
+  // =========================== CREATE EQUIPMENT ===========================
   const handleSubmitEquipment = () => {
     Axios.post("http://localhost:3002/create/equipment", {
       car_model_id: carModelId,
@@ -21,7 +21,7 @@ export default function DashBoardEquipment() {
     })
   }
 
-// =========================== READ EQUIPMENTS ===========================
+  // =========================== READ EQUIPMENTS ===========================
   useEffect(() => {
     Axios.get(`http://localhost:3002/get/equipment/${id}`)
       .then((response) => {
@@ -32,7 +32,7 @@ export default function DashBoardEquipment() {
       })
   }, [id]);
 
-// =========================== UPDATE EQUIPMENT ===========================
+  // =========================== UPDATE EQUIPMENT ===========================
   const updateEquipment = (id) => {
     Axios.put(`http://localhost:3002/update/equipment/${id}`, {
       li: modifyEquip,
@@ -40,9 +40,14 @@ export default function DashBoardEquipment() {
     window.location.reload();
   }
 
-// =========================== DELETE EQUIPMENT ===========================
+  // =========================== DELETE EQUIPMENT ===========================
   const deleteEquipment = (id) => {
     Axios.delete(`http://localhost:3002/delete/equipment/${id}`);
+    window.location.reload();
+  }
+  // =========================== DELETE ALL EQUIPMENT ===========================
+  const deleteAllEquipment = (id) => {
+    Axios.delete(`http://localhost:3002/delete/allequipment/${id}`);
     window.location.reload();
   }
 
@@ -89,8 +94,11 @@ export default function DashBoardEquipment() {
               </Item>
             ))}
           </ul>
+          <div>
+            <ButtonChanges onClick={() => { deleteAllEquipment(equipment1[0].car_model_id) }}>Supprimer</ButtonChanges>
+          </div>
         </WrapperEquipment>
-      ) : <ErrorPage error="Erreur: Cette page n'existe pas. Veuillez remplir le forumlaire ci-dessus"/>}
+      ) : <ErrorPage error="Erreur: Cette page n'existe pas. Veuillez remplir le forumlaire ci-dessus" />}
     </Wrapper>
   );
 };
