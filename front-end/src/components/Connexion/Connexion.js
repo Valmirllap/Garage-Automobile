@@ -11,6 +11,8 @@ export default function Connexion() {
   const [message, setMessage] = useState("");
   const [rergisterMessage, setRegisterMessage] = useState("");
   const [loginStatus, setLoginStatus] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isEmployee, setIsEmployee] = useState(false);
 
   Axios.defaults.withCredentials = true;
   const login = (e) => {
@@ -27,16 +29,8 @@ export default function Connexion() {
         setLoginStatus(true);
         setMessage("");
         setRegisterMessage("");
-
-        setTimeout(() => {
-          const isAdmin = response.data.result.isAdmin;
-          const isEmployee = response.data.result.isEmployee;
-          if (isAdmin) {
-            navigate("/register");
-          } else if (isEmployee) {
-            navigate("/dashboard");
-          }
-        }, 7000);
+        setIsAdmin(response.data.result.isAdmin)
+        setIsEmployee(response.data.result.isEmployee)
       }
     });
   };
@@ -66,8 +60,14 @@ export default function Connexion() {
       }
     }).then((response) => {
       if (response.data) {
-        console.log(response)
         setMessage(response.data)
+        setTimeout(() => {
+          if (isAdmin) {
+            navigate("/register");
+          } else if (isEmployee) {
+            navigate("/dashboard");
+          }
+        }, 4000);
       }
     })
   }

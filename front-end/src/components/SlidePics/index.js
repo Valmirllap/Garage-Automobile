@@ -82,8 +82,7 @@ width: 100%;
     width:100%;
   }
   @media screen and (max-width: 576px){
-    position: static;
-    height: 110vh;
+    height: 105vh;
   }
 }
 & .arrows {
@@ -97,6 +96,7 @@ width: 100%;
   @media screen and (max-width: 768px){
     top: 65%;
     left: 50%;
+    font-size: 2rem;
   }
 }
 & .image {
