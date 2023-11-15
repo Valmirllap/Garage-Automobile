@@ -2,11 +2,13 @@ const mysql = require("mysql");
 
 // ==================== CONNECTION MYSQL: SMALL DETAILS ====================
 const dbCarSmallDetails = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'carData',
+  user: process.env.MYSQL_HOST || "root",
+  host: process.env.MYSQL_USER || "localhost",
+  password: process.env.MYSQL_PASSWORD || "password",
+  database: process.env.MYSQL_DATABASE || "carData",
 });
+
+dbCarData.connect();
 
 // ==================== CREATE SMALL DETAILS ====================
 function smallDetailsCreate(req, res) {

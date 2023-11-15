@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require('cors');
+const path = require('path');
 
 // ========= AUTHORISATION =========
 const bodyParser = require("body-parser");
@@ -31,6 +32,7 @@ app.use(session({
   },
 }))
 
+app.use(express.static('build'));
 
 // ========= SERVER-SIDE FOR CONNEXION =========
 const userRoute = require("./routes/user");
@@ -65,8 +67,13 @@ const generalDataOneRoute = require("./routes/generalDataOne");
 generalDataOneRoute(app);
 
 
+// if react router, then add this
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build/index.html'))
+})
 
 // ========= LISTENNING SERVER =========
-app.listen(3002, () => {
+const port = process.env.PORT || 3002
+app.listen(port, () => {
   console.log("running server")
 });

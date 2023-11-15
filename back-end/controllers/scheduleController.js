@@ -2,11 +2,13 @@ const mysql = require("mysql");
 
 // ==================== CONNECTION MYSQL: SCHEDULE ====================
 const dbOpeningTime = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'Schedule',
+  user: process.env.MYSQL_HOST || "root",
+  host: process.env.MYSQL_USER || "localhost",
+  password: process.env.MYSQL_PASSWORD || "password",
+  database: process.env.MYSQL_DATABASE || "Schedule",
 });
+
+dbOpeningTime.connect();
 
 // ==================== GET SCHEDULE ====================
 function scheduleGet(req, res) {
