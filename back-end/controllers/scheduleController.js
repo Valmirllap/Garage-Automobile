@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 
 // ==================== CONNECTION MYSQL: SCHEDULE ====================
-const dbOpeningTime = mysql.createPool({
+const dbOpeningTime = mysql.createConnection({
   user: process.env.MYSQL_HOST || "root",
   host: process.env.MYSQL_USER || "localhost",
   password: process.env.MYSQL_PASSWORD || "password",

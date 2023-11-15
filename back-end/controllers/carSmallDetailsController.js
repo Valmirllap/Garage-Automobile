@@ -8,7 +8,7 @@ const dbCarSmallDetails = mysql.createConnection({
   database: process.env.MYSQL_DATABASE || "carData",
 });
 
-dbCarData.connect();
+dbCarSmallDetails.connect();
 
 // ==================== CREATE SMALL DETAILS ====================
 function smallDetailsCreate(req, res) {
