@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9b93f2ba.css",
+    "main.js": "/static/js/main.213e0feb.js",
+    "static/js/787.1aab8d10.chunk.js": "/static/js/787.1aab8d10.chunk.js",
+    "static/media/Urus.jpg": "/static/media/Urus.e930ba53c2fb67596318.jpg",
+    "static/media/clutch.jpg": "/static/media/clutch.773d93031d2956adf069.jpg",
+    "static/media/revision.jpg": "/static/media/revision.69260746bded3b2c14a1.jpg",
+    "static/media/kit-de-distribution.jpg": "/static/media/kit-de-distribution.b0fde6bc1a700693fa40.jpg",
+    "static/media/logo.png": "/static/media/logo.fbdb2e18ae27f6306d30.png",
+    "static/media/brakes.jpg": "/static/media/brakes.d40c41a084830ec7eebf.jpg",
+    "static/media/AC.jpg": "/static/media/AC.675e3da0a94b46fd899c.jpg",
+    "index.html": "/index.html",
+    "main.9b93f2ba.css.map": "/static/css/main.9b93f2ba.css.map",
+    "main.213e0feb.js.map": "/static/js/main.213e0feb.js.map",
+    "787.1aab8d10.chunk.js.map": "/static/js/787.1aab8d10.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9b93f2ba.css",
+    "static/js/main.213e0feb.js"
+  ]
+}

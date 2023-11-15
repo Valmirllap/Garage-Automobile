@@ -1,13 +1,14 @@
 const mysql = require("mysql");
 
 // ==================== CONNECTION MYSQL: CrudComments ====================
-const dbComments = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'CrudComments',
+const dbComments = mysql.createConnection({
+  user: process.env.MYSQL_HOST || "root",
+  host: process.env.MYSQL_USER || "localhost",
+  password: process.env.MYSQL_PASSWORD || "password",
+  database: process.env.MYSQL_DATABASE || "CrudComments",
 });
 
+dbComments.connect();
 // ==================== CREATE COMMENTS ====================
 function commentsCreate(req, res) {
   const nameReviews = req.body.name;

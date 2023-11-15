@@ -2,11 +2,13 @@ const mysql = require("mysql");
 
 // ==================== CONNECTION MYSQL: CarImg ====================
 const dbCarImg = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'CarImg',
+  user: process.env.MYSQL_HOST || "root",
+  host: process.env.MYSQL_USER || "localhost",
+  password: process.env.MYSQL_PASSWORD || "password",
+  database: process.env.MYSQL_DATABASE || "CarImg",
 });
+
+dbCarImg.connect();
 
 // ==================== CREATE PICS ====================
 function createCarPics(req, res) {

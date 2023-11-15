@@ -6,10 +6,10 @@ const saltRound = 10;
 
 // ==================== CONNECTION MYSQL: dbLogin ====================
 const dbConnexion = mysql.createConnection({
-  user: "root",
-  host: "localhost",
-  password: "password",
-  database: "dbLogin",
+  user: process.env.MYSQL_HOST || "root",
+  host: process.env.MYSQL_USER || "localhost",
+  password: process.env.MYSQL_PASSWORD || "password",
+  database: process.env.MYSQL_DATABASE || "dbLogin",
 });
 // ==================== GET LOGIN ====================
 function loginGet(req, res) {
@@ -39,18 +39,17 @@ function loginPost (req, res) {
             req.session.user = result[0];
             res.json({ auth: true, token: token, result: { ...result[0] } })
           } else {
-            res.json({ auth: false, message: "Email ou Mot de passe invalide" });
+            res.json({ auth: false, message: "Email ou Mot de passe invalide" }); // Sachant ici que c'est le mot de passe qui ne matche pas
           }
         });
       } else {
-        res.json({ auth: false, message: "Email introuvable" });
+        res.json({ auth: false, message: "Email ou mot de passe invalide" }); // Sachant ici que c'est l'email qui ne matche pas
       }
     }
   );
 }
 // ==================== POST REGISTER ====================
 function registerPost (req, res) {
-  if (req.session.user && req.session.user.isAdmin) {
     const email = req.body.email;
     const password = req.body.password;
 
@@ -71,9 +70,6 @@ function registerPost (req, res) {
         );
       }
     });
-  } else {
-    res.status(403).send({ message: "Accès refusé" });
-  }
 }
 
 

@@ -2,11 +2,13 @@ const mysql = require("mysql");
 
 // ==================== CONNECTION MYSQL: EquipmentCar ====================
 const dbEquipments_data = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'equipments_data',
+  user: process.env.MYSQL_HOST || "root",
+  host: process.env.MYSQL_USER || "localhost",
+  password: process.env.MYSQL_PASSWORD || "password",
+  database: process.env.MYSQL_DATABASE || "equipments_data",
 });
+
+dbEquipments_data.connect();
 
 // ==================== CREATE EQUIPMENTS ====================
 function equipmentCreate(req, res) {

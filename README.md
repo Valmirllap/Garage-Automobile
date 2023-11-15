@@ -21,7 +21,7 @@ In the project directory, you can run:
 In the project directory, you can run:
 
 ### `cd back-end`
-### `npm start`
+### `npm run dev`
 
 This will start your project in local and if you want to make changes you can do it first in local then share it online by opening 
 [http://localhost:3000](http://localhost:3000) to view it in your browser.

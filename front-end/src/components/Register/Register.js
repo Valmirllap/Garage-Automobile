@@ -7,7 +7,7 @@ import AccesDenied from '../hook/AccesDenied';
 
 export default function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
+  const [registerPassword, setRegisterPassword] = useState();
   const [logged, setLogged] = useState(false);
   const [admin, setAdmin] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -21,8 +21,8 @@ export default function Register() {
           setAdmin(response.data.isAdmin);
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        console.log("Quelque chose n'a pas été!");
       })
       .finally(() => {
         setLoading(false);
@@ -43,13 +43,7 @@ export default function Register() {
     Axios.post('http://localhost:3002/register', {
       email: registerEmail,
       password: registerPassword
-    }, { withCredentials: true })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    })
   };
 
   if (loading) {
