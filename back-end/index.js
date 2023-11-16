@@ -6,6 +6,7 @@ const path = require('path');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const MemoryStore = require('memorystore')(session)
 
 // ========= MIDDLEWARES =========
 const app = express();
@@ -30,6 +31,9 @@ app.use(session({
     secure: false,
     httpOnly: true,
   },
+  store: new MemoryStore({
+    checkPeriod: 86400000 // prune expired entries every 24h
+  }),
 }))
 
 app.use(express.static('build'));

@@ -1,16 +1,18 @@
 const jwt = require('jsonwebtoken');
-const mysql = require("mysql");
-const bcrypt = require('bcrypt');
+const mysql = require("mysql2");
+const bcrypt = require('bcryptjs');
 const saltRound = 10;
 
 
 // ==================== CONNECTION MYSQL: dbLogin ====================
 const dbConnexion = mysql.createConnection({
-  user: process.env.MYSQL_HOST || "root",
-  host: process.env.MYSQL_USER || "localhost",
+  user: process.env.MYSQL_USER|| "root",
+  host: process.env.MYSQL_HOST || "localhost",
   password: process.env.MYSQL_PASSWORD || "password",
   database: process.env.MYSQL_DATABASE || "dbLogin",
 });
+
+dbConnexion.connect();
 // ==================== GET LOGIN ====================
 function loginGet(req, res) {
   if (req.session.user) {
