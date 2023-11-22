@@ -8,8 +8,6 @@ const dbCarImg = mysql.createConnection({
   database: process.env.MYSQL_DATABASE || "CarImg",
 });
 
-dbCarImg.connect();
-
 // ==================== CREATE PICS ====================
 function createCarPics(req, res) {
   const car_pics_name = req.body.car_pics_name;

@@ -54,6 +54,10 @@ scheduleRoute(app);
 const EquipmentsRoute = require("./routes/equipmentCar");
 EquipmentsRoute(app);
 
+// ========= SERVER-SIDE FOR SERVICES =========
+const servicesRoute = require('./routes/services');
+servicesRoute(app);
+
 // ========= SERVER-SIDE FOR CAR DATA INFO =========
 const CarsInfoRoute = require("./routes/carDataInfo");
 CarsInfoRoute(app);

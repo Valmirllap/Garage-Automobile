@@ -8,8 +8,6 @@ const dbCarData = mysql.createConnection({
   database: process.env.MYSQL_DATABASE || "carData",
 });
 
-dbCarData.connect();
-
 // ==================== CREATE CAR DATA ====================
 function carDataInfoPost(req, res) {
   const { image, car, title, year, gas, miles, price, link, picsLink, dashboardLink } = req.body;
@@ -51,7 +49,7 @@ function carDataInfoUpdate(req, res) {
   if (price) updateFields.price = price;
   if (link) updateFields.link = link;
   if (picsLink) updateFields.picsLink = picsLink;
-  if(dashboardLink) updateFields.dashboardLink = dashboardLink;
+  if (dashboardLink) updateFields.dashboardLink = dashboardLink;
 
 
   dbCarData.query(sqlUpdate, [updateFields, id], (err, result) => {

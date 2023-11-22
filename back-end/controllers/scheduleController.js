@@ -25,8 +25,7 @@ function scheduleUpdate(req, res) {
   const sqlUpdateOpenning = "UPDATE `scheduleFooter` SET openingTime = ? WHERE id = ?";
   dbOpeningTime.query(sqlUpdateOpenning, [openingTime, id], (err, result) => {
     if (err) console.log(err)
-  })
+  });
 }
-
 
 module.exports = { scheduleGet, scheduleUpdate };
