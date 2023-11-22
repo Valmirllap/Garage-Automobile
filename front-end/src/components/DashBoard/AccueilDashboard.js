@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaStar } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import Axios from "axios"
-import CardServices from '../Accueil/CardServices';
+import CardServicesAdd from '../DashBoardComponent/cardServicesAdd';
 import MainTitle from '../hook/MainTitle';
 import SideBar from './SideBar';
 import AccesDenied from '../hook/AccesDenied';
@@ -99,7 +99,7 @@ export default function AccueilDashboard() {
     <Wrapper>
       <MainTitle text="Service réparation" />
       <SideBar />
-      <CardServices />
+      <CardServicesAdd/>
       <Comments>
         <Form onSubmit={handleCommentSubmit}>
           <TitleComments>Donnez votre avis sur nos service:</TitleComments>

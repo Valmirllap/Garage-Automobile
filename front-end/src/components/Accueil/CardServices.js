@@ -7,11 +7,11 @@ import Ac from "../../Images/AC.jpg";
 
 export default function CardServices() {
   const services = [
-    { id: 1, image: Revision, title: "Révision Auto", price: "à partir de 50€" },
-    { id: 2, image: Kit, title: "Kit de distribution", price: "à partir de 350€" },
-    { id: 3, image: Brakes, title: "Disques et plaquettes de frein", price: "à partir de 59€" },
-    { id: 4, image: Clutch, title: "Embrayage", price: "à partir de 279€" },
-    { id: 5, image: Ac, title: "Climatisation", price: "à partir de 55€" },
+    { id: 1, image: Revision, title: "Révision Auto", price: 50 },
+    { id: 2, image: Kit, title: "Kit de distribution", price: 350 },
+    { id: 3, image: Brakes, title: "Disques et plaquettes de frein", price: 59 },
+    { id: 4, image: Clutch, title: "Embrayage", price: 279 },
+    { id: 5, image: Ac, title: "Climatisation", price: 55 },
   ];
   return (
     <Display>
@@ -21,7 +21,7 @@ export default function CardServices() {
             <Img src={value.image} alt={value.title} />
             <ServiceText>
               <h1>{value.title}</h1>
-              <p>{value.price}</p>
+              <p>à partir de {value.price}€</p>
             </ServiceText>
           </ContainerService>
         );

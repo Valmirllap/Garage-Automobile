@@ -55,14 +55,15 @@ export default function DashBoardEquipment() {
     <Wrapper>
       <H1>Equipement Form</H1>
       <Form>
-        <Label>Insérer pour quel modèle de voiture</Label>
         <Input
           type='text'
           name='carModelId'
           value={carModelId}
           onChange={(e) => {
             setCarModelId(e.target.value);
-          }} />
+          }}
+          className='hide'
+          readOnly />
         <Label>Insérer l'équipement que vous devez ajouter</Label>
         <Input
           type='text'
@@ -95,7 +96,7 @@ export default function DashBoardEquipment() {
             ))}
           </ul>
           <div>
-            <ButtonChanges onClick={() => { deleteAllEquipment(equipment1[0].car_model_id) }}>Supprimer</ButtonChanges>
+            <ButtonChanges onClick={() => { deleteAllEquipment(equipment1[0].car_model_id) }}>Supprimer tout</ButtonChanges>
           </div>
         </WrapperEquipment>
       ) : <ErrorPage error="Erreur: Cette page n'existe pas. Veuillez remplir le forumlaire ci-dessus" />}
