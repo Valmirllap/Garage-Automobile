@@ -10,7 +10,8 @@ export default function Footer() {
   const [dataDB, setDataDB] = useState([]);
 
   useEffect(() => {
-    Axios.get('http://localhost:3002/get/opening').then((response) => {
+    Axios.get('https://garage-automobile-627012dfc93e.herokuapp.com/get/opening')
+    .then((response) => {
       setDataDB(response.data);
     })
   }, [])

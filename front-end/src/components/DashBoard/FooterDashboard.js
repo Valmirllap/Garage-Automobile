@@ -21,7 +21,7 @@ export default function FooterDashboard() {
   }, [])
   // =========================== UPDATE SCHEDULE ===========================
   const updateOpeningTime = (id) => {
-    Axios.put('http://localhost:3002/update/opening', {
+    Axios.put('https://garage-automobile-627012dfc93e.herokuapp.com/update/opening', {
       openingTime: open,
       id: id,
     });
