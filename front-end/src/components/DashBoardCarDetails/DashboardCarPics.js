@@ -84,12 +84,10 @@ width: 100%;
   justify-content: center;
   align-items: center;
   @media screen and (max-width: 768px){
-    position: static;
     height: 100vh;
     width:100%;
   }
   @media screen and (max-width: 576px){
-    position: static;
     height: 110vh;
   }
 }
@@ -102,7 +100,11 @@ width: 100%;
   cursor: pointer;
   user-select: none;
   @media screen and (max-width: 768px){
-    top: 65%;
+    top: 50%;
+    left: 50%;
+  }
+  @media screen and (max-width: 576px){
+    top: 50%;
     left: 50%;
   }
 }

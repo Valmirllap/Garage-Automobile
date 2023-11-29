@@ -35,7 +35,7 @@ export default function Footer() {
       <table>
         <tbody>
           <tr>
-            <th>Location</th>
+            <th>Localisation</th>
             <th>Menu</th>
             <th>Contact</th>
             <th>Horaire d'ouverture</th>

@@ -125,7 +125,9 @@ margin-bottom: 50px;
   font-size: 12px;
 }
 `;
-const ContainerInfoConnexion = styled.div``;
+const ContainerInfoConnexion = styled.div`
+  margin-left: 10px;
+`;
 
 const ContainerTitleText = styled.div`
 margin-top: 30px;

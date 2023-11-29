@@ -96,7 +96,7 @@ export default function DashBoardEquipment() {
             ))}
           </ul>
           <div>
-            <ButtonChanges onClick={() => { deleteAllEquipment(equipment1[0].car_model_id) }}>Supprimer tout</ButtonChanges>
+            <ButtonChanges className="delete-all" onClick={() => { deleteAllEquipment(equipment1[0].car_model_id) }}>Supprimer tout</ButtonChanges>
           </div>
         </WrapperEquipment>
       ) : <ErrorPage error="Erreur: Cette page n'existe pas. Veuillez remplir le forumlaire ci-dessus" />}
@@ -116,6 +116,9 @@ const WrapperEquipment = styled.div`
 margin: 25px 0 25px 0;
 padding: 20px;
 background-color: ${(props) => props.theme.card};
+& .delete-all {
+    margin-top: 20px;
+  }
 `;
 
 const H1 = styled.h1`
@@ -136,6 +139,11 @@ const Item = styled.li`
 margin-top: 10px;
 color: #242425;
 font-size: 19px;
+  @media screen and (max-width: 576px){
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 // FORM TO ADD EQUIPMENT TO THE CAR
@@ -184,4 +192,8 @@ border-radius: 10px;
 const ButtonChanges = styled.button`
   padding: 5px;
   cursor: pointer;
+  @media screen and (max-width: 576px) {
+    font-size: 12px;
+    width: 30%;
+  }
 `;

@@ -1,9 +1,5 @@
 import React from 'react'
 import styled from "styled-components";
-import { FaFacebookSquare } from "react-icons/fa";
-import { FaInstagramSquare } from "react-icons/fa";
-import { FaTwitterSquare } from "react-icons/fa"
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Axios from 'axios';
 import SideBar from './SideBar';
@@ -18,7 +14,7 @@ export default function FooterDashboard() {
 
   // =========================== READ SCHEDULE ===========================
   useEffect(() => {
-    Axios.get('http://localhost:3002/get/opening')
+    Axios.get('https://garage-automobile-627012dfc93e.herokuapp.com/get/opening')
       .then((response) => {
         setDataDB(response.data);
       })
@@ -29,7 +25,7 @@ export default function FooterDashboard() {
       openingTime: open,
       id: id,
     });
-    setOpen("");
+    window.location.reload();
   }
 
   // =========================== ACCES TO THE PAGE /DASHBOARD/FOOTER ONLY THE ADMIN ===========================
@@ -56,21 +52,6 @@ export default function FooterDashboard() {
     )
   }
 
-  const data = [
-    { id: 1, contact: "Tél.: +33 123456789" },
-    { id: 2, contact: "Email: Example@gmail.com" },
-    { id: 3, contact: "Réseau sociaux:" },
-    {
-      id: 4, contact: [
-        <Link to="https://www.facebook.com"><FaFacebookSquare className="social-logo" /></Link>,
-        <Link to="https://www.instagram.com"><FaInstagramSquare className="social-logo" /></Link>,
-        <Link to="https://www.twitter.com"><FaTwitterSquare className="social-logo" /></Link>
-      ]
-    },
-    { id: 5, contact: "" },
-    { id: 6, contact: "" },
-    { id: 7, contact: "" },
-  ];
   return (
     <Container>
       <SideBar />
@@ -79,23 +60,10 @@ export default function FooterDashboard() {
           <table>
             <tbody>
               <tr>
-                <th>Location</th>
-                <th>Menu</th>
-                <th>Contact</th>
                 <th>Horaire d'ouverture</th>
               </tr>
               {dataDB.map((value, index) => (
                 <tr key={index}>
-                  <td>{value.Location}</td>
-                  <td><Link className="menu" to={value.link}>{value.menu}</Link></td>
-                  {data.map((social) => {
-                    if (social.id === value.id) {
-                      return (
-                        <td key={social.id}>{social.contact}</td>
-                      )
-                    }
-                    return null
-                  })}
                   <td className='update'>{value.openingTime}
                     <InputChange type='text' defaultValue={value.openingTime} onChange={(e) => {
                       setOpen(e.target.value)
@@ -200,16 +168,17 @@ const ContainerTable = styled.footer`
 `;
 
 const ButtonModify = styled.button`
-  width: 50%;
+  width: 30%;
   @media screen and (max-width: 768px){
     font-size: 13px;
-    width: 100%;
+    width: 30%;
   }
 `;
 
 const InputChange = styled.input`
-  width: 100%;
+  width: 50%;
   @media screen and (max-width: 768px){
     font-size: 13px;
+    width: 70%;
   }
 `;

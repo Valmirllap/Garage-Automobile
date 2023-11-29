@@ -1,21 +1,20 @@
 import styled from "styled-components"
-import Revision from "../../Images/revision.jpg";
-import Kit from "../../Images/kit-de-distribution.jpg";
-import Brakes from "../../Images/brakes.jpg";
-import Clutch from "../../Images/clutch.jpg";
-import Ac from "../../Images/AC.jpg";
+import { useState, useEffect } from "react";
+import Axios from "axios";
 
 export default function CardServices() {
-  const services = [
-    { id: 1, image: Revision, title: "Révision Auto", price: 50 },
-    { id: 2, image: Kit, title: "Kit de distribution", price: 350 },
-    { id: 3, image: Brakes, title: "Disques et plaquettes de frein", price: 59 },
-    { id: 4, image: Clutch, title: "Embrayage", price: 279 },
-    { id: 5, image: Ac, title: "Climatisation", price: 55 },
-  ];
+  const [servicesDB, setServicesDB] = useState([]);
+    // ============================== RETRIEVE A SERVICE ==============================
+    useEffect(() => {
+      Axios.get('http://localhost:3002/service/get')
+        .then((response) => {
+          setServicesDB(response.data)
+        })
+    }, []);
+
   return (
     <Display>
-      {services.map((value) => {
+      {servicesDB.map((value) => {
         return (
           <ContainerService key={value.id}>
             <Img src={value.image} alt={value.title} />
@@ -72,7 +71,10 @@ flex-direction: column;
   font-family: Barlow;
   color: #CFDBD5;
   @media screen and (max-width: 768px){
-    font-size: 20px;
+    font-size: 22px;
+  }
+  @media screen and (max-width: 576px){
+    font-size: 17px;
   }
 }
 & p {
@@ -81,6 +83,9 @@ flex-direction: column;
   color: #F5CB5C;
   @media screen and (max-width: 768px){
     font-size: 16px;
+  }
+  @media screen and (max-width: 576px){
+    font-size: 13px;
   }
 }
 `;

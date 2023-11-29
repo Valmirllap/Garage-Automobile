@@ -41,7 +41,7 @@ export default function DashBoard() {
   return (
     <Wrapper>
       <SideBar />
-      <BackgroundImg src={Urus} alt='Aston Martin' />
+      <BackgroundImg src={Urus} alt='Urus' />
       <DashboardHome>
         <DashboardContent>
           <Title>Bienvenue sur le tableau de bord</Title>
@@ -66,8 +66,12 @@ export default function DashBoard() {
 // ==============================================================================
 
 const Wrapper = styled.div`
-  display: flex;
+display: flex;
+@media screen and (max-width: 768px){
+    flex-direction: column;
+  }
 `;
+
 
 const DashboardHome = styled.div`
   width: 100%;
@@ -76,7 +80,14 @@ const DashboardHome = styled.div`
 `;
 
 const DashboardContent = styled.div`
-  max-width: 600px;
+  width: 100%;
+  @media screen and (max-width: 768px){
+    width: 80%;
+    margin-top: 10px;
+  }
+  @media screen and (max-width: 576px){
+    width: 90%;
+  }
 `;
 
 const Title = styled.h1`
@@ -84,6 +95,9 @@ const Title = styled.h1`
   font-weight: 700;
   font-family: Libre Baskerville;
   line-height: 1.2;
+  @media screen and (max-width: 768px){
+    font-size: 35px;
+  }
 `;
 
 const Paragraphe = styled.p`
@@ -91,14 +105,24 @@ const Paragraphe = styled.p`
   font-family: barlow;
   margin: 20px 0 40px;
   line-height: normal;
+  @media screen and (max-width: 768px){
+   font-size: 15px;
+  }
 `;
 
 const BackgroundImg = styled.img`
   width: 30%;
-  margin-right: 10%;
+  margin-right: 30px;
   &:hover {
     border-radius: 30%;
     transition: 1s;
     opacity: 0.6;
+  }
+  @media screen and (max-width: 768px){
+    width: 60%;
+    margin-top: 10px;
+  }
+  @media screen and (max-width: 576px){
+    width: 85%;
   }
 `;

@@ -158,6 +158,7 @@ text-decoration: underline;
 color: #242425;
 font-family: libre baskerville;
 font-size: 24px;
+font-weight: 700;
 `;
 
 const ItemContainer = styled.div`
@@ -178,6 +179,9 @@ const Item = styled.li`
 color: #242425;
 margin-top: 15px;
 font-size: 19px;
+  @media screen and (max-width: 576px){
+    font-size: 15px;
+    }
 `;
 
 const ButtonChanges = styled.button`

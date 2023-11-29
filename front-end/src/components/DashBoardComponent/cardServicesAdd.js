@@ -141,7 +141,10 @@ flex-direction: column;
   font-family: Barlow;
   color: #CFDBD5;
   @media screen and (max-width: 768px){
-    font-size: 20px;
+    font-size: 22px;
+  }
+  @media screen and (max-width: 576px){
+    font-size: 17px;
   }
 }
 & p {
@@ -151,6 +154,9 @@ flex-direction: column;
   @media screen and (max-width: 768px){
     font-size: 16px;
   }
+  @media screen and (max-width: 576px){
+    font-size: 13px;
+  }
 }
 `;
 
@@ -158,4 +164,10 @@ const ButtonChange = styled.button`
   font-size: 18px;
   cursor: pointer;
   padding: 5px;
+  @media screen and (max-width: 768px){
+    font-size: 16px;
+  }
+  @media screen and (max-width: 576px){
+    font-size: 13px;
+  }
 `;

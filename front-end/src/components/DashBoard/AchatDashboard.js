@@ -212,6 +212,10 @@ margin-bottom: 5px;
 `;
 
 const Price = styled.div`
+  @media screen and (max-width: 750px) {
+    display: flex;
+    flex-direction: column;
+  }
 & .font {
   font-size: 18px;
   font-weight: 600;
@@ -234,8 +238,9 @@ width: 150px;
 margin-top: -15px;
 cursor: pointer;
 border-radius: 10px;
-@media screen and (max-width: 605px) {
+@media screen and (max-width: 750px) {
   width: 100px;
+  margin-top: 10px;
 }
 `;
 
