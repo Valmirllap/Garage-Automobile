@@ -91,4 +91,5 @@ function allEquipmentDelete(req, res) {
   })
 }
 
+
 module.exports = { equipmentCreate, equipmentGet, equipmentUpdate, equipmentDelete, allEquipmentDelete };

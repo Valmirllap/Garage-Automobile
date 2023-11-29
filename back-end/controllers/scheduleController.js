@@ -12,7 +12,7 @@ dbOpeningTime.connect();
 
 // ==================== GET SCHEDULE ====================
 function scheduleGet(req, res) {
-  const sqlSelectFooter = "SELECT * FROM `scheduleFooter`";
+  const sqlSelectFooter = "SELECT * FROM `schedulefooter`";
   dbOpeningTime.query(sqlSelectFooter, (err, result) => {
     res.send(result)
   });
@@ -22,7 +22,7 @@ function scheduleGet(req, res) {
 function scheduleUpdate(req, res) {
   const openingTime = req.body.openingTime;
   const id = req.body.id;
-  const sqlUpdateOpenning = "UPDATE `scheduleFooter` SET openingTime = ? WHERE id = ?";
+  const sqlUpdateOpenning = "UPDATE `schedulefooter` SET openingTime = ? WHERE id = ?";
   dbOpeningTime.query(sqlUpdateOpenning, [openingTime, id], (err, result) => {
     if (err) console.log(err)
   });

@@ -120,4 +120,5 @@ function generalDataOneDelete(req, res) {
   })
 }
 
+
 module.exports = { generalDataOneCreate, generalDataOneGet, generalDataOneUpdate, generalDataOneDelete }
