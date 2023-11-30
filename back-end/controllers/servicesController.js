@@ -6,7 +6,10 @@ const dbServices = mysql.createConnection({
   host: process.env.MYSQL_HOST || "localhost",
   password: process.env.MYSQL_PASSWORD || "password",
   database: process.env.MYSQL_DATABASE || "CrudComments",
+  connectionLimit: 11,
 });
+
+dbServices.connect();
 
 // ==================== CREATE SERVICES ====================
 function servicePost(req, res) {
@@ -64,5 +67,6 @@ function serviceDelete(req, res) {
     }
   })
 }
+
 
 module.exports = { servicePost, serviceGet, servicePut, serviceDelete }
