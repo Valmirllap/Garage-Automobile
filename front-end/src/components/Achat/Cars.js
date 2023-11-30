@@ -13,7 +13,7 @@ export default function Cars() {
   const [yearRange, setYearRange] = useState([2000, 2023]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/get/carinfo")
+    Axios.get("https://garage-automobile-627012dfc93e.herokuapp.com/get/carinfo")
     .then((response) => {
       setCarInfo(response.data);
     })

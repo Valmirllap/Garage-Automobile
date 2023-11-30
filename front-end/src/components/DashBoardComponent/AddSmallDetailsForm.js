@@ -18,7 +18,7 @@ export default function AddSmallDetailsForm() {
 
   // =========================== CREATE SMALL DETAILS ===========================
   const handleSubmitSmallDetail = () => {
-    Axios.post(`http://localhost:3002/smalldetails/create/${id}`, {
+    Axios.post(`https://garage-automobile-627012dfc93e.herokuapp.com/smalldetails/create/${id}`, {
       car_id: carId,
       state: state,
       firstReg: firstReg,

@@ -26,7 +26,7 @@ export default function AddGeneralDataForm() {
 
   // =========================== CREATE GENERAL DATA ===========================
   const handleSubmitGeneralData = () => {
-    Axios.post(`http://localhost:3002/dataone/create/${id}`, {
+    Axios.post(`https://garage-automobile-627012dfc93e.herokuapp.com/dataone/create/${id}`, {
       car_id: carId,
       state: state,
       registration: registration,

@@ -13,7 +13,7 @@ export default function DashBoard() {
 
   // =========================== ACCES TO THE PAGE /DASHBOARD ===========================
   useEffect(() => {
-    Axios.get("http://localhost:3002/login", { withCredentials: true })
+    Axios.get("https://garage-automobile-627012dfc93e.herokuapp.com/login", { withCredentials: true })
       .then((response) => {
         if (response.data.loggedIn === true) {
           setLogged(true);

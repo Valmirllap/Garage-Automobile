@@ -15,7 +15,7 @@ export default function DashBoardEquipment() {
 
   // =========================== CREATE EQUIPMENT ===========================
   const handleSubmitEquipment = () => {
-    Axios.post("http://localhost:3002/create/equipment", {
+    Axios.post("https://garage-automobile-627012dfc93e.herokuapp.com/create/equipment", {
       car_model_id: carModelId,
       li: modifyEquip,
     })
@@ -23,7 +23,7 @@ export default function DashBoardEquipment() {
 
   // =========================== READ EQUIPMENTS ===========================
   useEffect(() => {
-    Axios.get(`http://localhost:3002/get/equipment/${id}`)
+    Axios.get(`https://garage-automobile-627012dfc93e.herokuapp.com/get/equipment/${id}`)
       .then((response) => {
         setEquipment1(response.data.equipment);
       })
@@ -34,7 +34,7 @@ export default function DashBoardEquipment() {
 
   // =========================== UPDATE EQUIPMENT ===========================
   const updateEquipment = (id) => {
-    Axios.put(`http://localhost:3002/update/equipment/${id}`, {
+    Axios.put(`https://garage-automobile-627012dfc93e.herokuapp.com/update/equipment/${id}`, {
       li: modifyEquip,
     });
     window.location.reload();
@@ -42,12 +42,12 @@ export default function DashBoardEquipment() {
 
   // =========================== DELETE EQUIPMENT ===========================
   const deleteEquipment = (id) => {
-    Axios.delete(`http://localhost:3002/delete/equipment/${id}`);
+    Axios.delete(`https://garage-automobile-627012dfc93e.herokuapp.com/delete/equipment/${id}`);
     window.location.reload();
   }
   // =========================== DELETE ALL EQUIPMENT ===========================
   const deleteAllEquipment = (id) => {
-    Axios.delete(`http://localhost:3002/delete/allequipment/${id}`);
+    Axios.delete(`https://garage-automobile-627012dfc93e.herokuapp.com/delete/allequipment/${id}`);
     window.location.reload();
   }
 

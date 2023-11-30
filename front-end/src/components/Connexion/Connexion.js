@@ -17,7 +17,7 @@ export default function Connexion() {
   Axios.defaults.withCredentials = true;
   const login = (e) => {
     e.preventDefault();
-    Axios.post('http://localhost:3002/login', {
+    Axios.post('https://garage-automobile-627012dfc93e.herokuapp.com/login', {
       email: email,
       password: password,
     }).then((response) => {
@@ -36,7 +36,7 @@ export default function Connexion() {
   };
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/login").then((response) => {
+    Axios.get("https://garage-automobile-627012dfc93e.herokuapp.com/login").then((response) => {
       if (response.data.loggedIn === true) {
         setMessage(
           <div>
@@ -54,7 +54,7 @@ export default function Connexion() {
 
 
   const userAuth = () => {
-    Axios.get('http://localhost:3002/isAuth', {
+    Axios.get('https://garage-automobile-627012dfc93e.herokuapp.com/isAuth', {
       headers: {
         "x-access-token": localStorage.getItem("token"),
       }

@@ -13,7 +13,7 @@ export default function SlidePics() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Axios.get(`http://localhost:3002/carpics/get/${id}`)
+    Axios.get(`https://garage-automobile-627012dfc93e.herokuapp.com/carpics/get/${id}`)
       .then((response) => {
         setCarsPictures(response.data.pictures);
       })

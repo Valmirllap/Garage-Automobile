@@ -13,7 +13,7 @@ export default function SmallDetails() {
 
   // =========================== READ SMALL DETAILS ===========================
   useEffect(() => {
-    Axios.get(`http://localhost:3002/smalldetails/get/${id}`)
+    Axios.get(`https://garage-automobile-627012dfc93e.herokuapp.com/smalldetails/get/${id}`)
       .then((response) => {
         setSmallDetails(response.data.smallDetail);
       })
