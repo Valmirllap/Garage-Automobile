@@ -1,14 +1,4 @@
-const mysql = require("mysql2");
-
-// ==================== CONNECTION MYSQL: SMALL DETAILS ====================
-const dbCarSmallDetails = mysql.createConnection({
-  user: process.env.MYSQL_USER || "root",
-  host: process.env.MYSQL_HOST  || "localhost",
-  password: process.env.MYSQL_PASSWORD || "password",
-  database: process.env.MYSQL_DATABASE || "carData",
-});
-
-dbCarSmallDetails.connect();
+const dbCarSmallDetails = require('../mysql/carData');
 
 // ==================== CREATE SMALL DETAILS ====================
 function smallDetailsCreate(req, res) {
@@ -80,5 +70,6 @@ function smallDetailsDelete(req, res) {
     }
   })
 }
+
 
 module.exports = { smallDetailsGet, smallDetailsCreate, smallDetailsUpdate, smallDetailsDelete }

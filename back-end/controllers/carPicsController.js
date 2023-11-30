@@ -1,18 +1,10 @@
-const mysql = require("mysql2");
-
-// ==================== CONNECTION MYSQL: CarImg ====================
-const dbCarImg = mysql.createConnection({
-  user: process.env.MYSQL_USER || "root",
-  host: process.env.MYSQL_HOST || "localhost",
-  password: process.env.MYSQL_PASSWORD || "password",
-  database: process.env.MYSQL_DATABASE || "CarImg",
-});
+const dbCarImg = require('../mysql/carData');
 
 // ==================== CREATE PICS ====================
 function createCarPics(req, res) {
   const car_pics_name = req.body.car_pics_name;
   const url_img = req.body.url_img;
-  const sqlInsert = "INSERT INTO `cars_pics` (car_pics_name, url_img) VALUES (?,?);"
+  const sqlInsert = "INSERT INTO `car_pics` (car_pics_name, url_img) VALUES (?,?);"
 
   dbCarImg.query(sqlInsert, [car_pics_name, url_img], (err, result) => {
     if (err) {
@@ -26,7 +18,7 @@ function createCarPics(req, res) {
 // ==================== READ PICS ====================
 function getCarPics(req, res) {
   const carPicsName = req.params.car_pics_name;
-  const sqlSelect = "SELECT * FROM `cars_pics` WHERE car_pics_name = ?";
+  const sqlSelect = "SELECT * FROM `car_pics` WHERE car_pics_name = ?";
 
   dbCarImg.query(sqlSelect, [carPicsName], (err, result) => {
     if (err) {
@@ -45,7 +37,7 @@ function getCarPics(req, res) {
 // ==================== DELETE PICS ====================
 function deleteCarPics(req, res) {
   const car_pics_name = req.params.car_pics_name;
-  const sqlDelete = "DELETE FROM `cars_pics` WHERE car_pics_name = ?"
+  const sqlDelete = "DELETE FROM `car_pics` WHERE car_pics_name = ?"
 
   dbCarImg.query(sqlDelete, car_pics_name, (err, result) => {
     if (err) {

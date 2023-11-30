@@ -1,14 +1,4 @@
-const mysql = require("mysql2");
-
-// ==================== CONNECTION MYSQL: EquipmentCar ====================
-const dbEquipments_data = mysql.createConnection({
-  user: process.env.MYSQL_USER || "root",
-  host: process.env.MYSQL_HOST || "localhost",
-  password: process.env.MYSQL_PASSWORD || "password",
-  database: process.env.MYSQL_DATABASE || "equipments_data",
-});
-
-dbEquipments_data.connect();
+const dbEquipments_data = require('../mysql/carData');
 
 // ==================== CREATE EQUIPMENTS ====================
 function equipmentCreate(req, res) {
@@ -90,6 +80,5 @@ function allEquipmentDelete(req, res) {
     }
   })
 }
-
 
 module.exports = { equipmentCreate, equipmentGet, equipmentUpdate, equipmentDelete, allEquipmentDelete };

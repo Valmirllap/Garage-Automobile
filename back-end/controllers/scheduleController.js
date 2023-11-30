@@ -1,14 +1,4 @@
-const mysql = require("mysql2");
-
-// ==================== CONNECTION MYSQL: SCHEDULE ====================
-const dbOpeningTime = mysql.createConnection({
-  user: process.env.MYSQL_USER || "root",
-  host: process.env.MYSQL_HOST || "localhost",
-  password: process.env.MYSQL_PASSWORD || "password",
-  database: process.env.MYSQL_DATABASE || "Schedule",
-});
-
-dbOpeningTime.connect();
+const dbOpeningTime = require('../mysql/services');
 
 // ==================== GET SCHEDULE ====================
 function scheduleGet(req, res) {
