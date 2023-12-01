@@ -40,7 +40,7 @@ export default function Register() {
       return;
     }
 
-    Axios.post('https://garage-automobile-627012dfc93e.herokuapp.com/register', {
+    Axios.post("https://garage-automobile-627012dfc93e.herokuapp.com/register", {
       email: registerEmail,
       password: registerPassword
     })
@@ -125,9 +125,7 @@ margin-bottom: 50px;
   font-size: 12px;
 }
 `;
-const ContainerInfoConnexion = styled.div`
-  margin-left: 10px;
-`;
+const ContainerInfoConnexion = styled.div``;
 
 const ContainerTitleText = styled.div`
 margin-top: 30px;
