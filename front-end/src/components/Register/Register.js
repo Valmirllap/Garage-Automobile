@@ -14,7 +14,7 @@ export default function Register() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Axios.get("https://garage-automobile-627012dfc93e.herokuapp.com/login", { withCredentials: true })
+    Axios.get("http://localhost:3002/login", { withCredentials: true })
       .then((response) => {
         if (response.data.loggedIn === true) {
           setLogged(true);
@@ -40,7 +40,7 @@ export default function Register() {
       return;
     }
 
-    Axios.post('https://garage-automobile-627012dfc93e.herokuapp.com/register', {
+    Axios.post('http://localhost:3002/register', {
       email: registerEmail,
       password: registerPassword
     })

@@ -11,7 +11,7 @@ export default function GeneralData() {
 
   // =========================== READ GENERAL DATA ===========================
   useEffect(() => {
-    Axios.get(`https://garage-automobile-627012dfc93e.herokuapp.com/dataone/get/${id}`)
+    Axios.get(`http://localhost:3002/dataone/get/${id}`)
       .then((response) => {
         setServerData(response.data.generalDataOne);
       })

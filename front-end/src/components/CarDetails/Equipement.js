@@ -9,7 +9,7 @@ export default function Equipement() {
   const [equipment1, setEquipment1] = useState([]);
 
   useEffect(() => {
-    Axios.get(`https://garage-automobile-627012dfc93e.herokuapp.com/get/equipment/${id}`)
+    Axios.get(`http://localhost:3002/get/equipment/${id}`)
     .then((response) => {
       setEquipment1(response.data.equipment);
     })

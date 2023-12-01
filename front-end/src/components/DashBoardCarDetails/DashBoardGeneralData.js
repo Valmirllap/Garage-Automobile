@@ -39,7 +39,7 @@ export default function DashBoardGeneralData() {
 
   // =========================== READ GENERAL DATA ===========================
   useEffect(() => {
-    Axios.get(`https://garage-automobile-627012dfc93e.herokuapp.com/dataone/get/${id}`)
+    Axios.get(`http://localhost:3002/dataone/get/${id}`)
       .then((response) => {
         setServerData(response.data.generalDataOne);
       })
@@ -52,13 +52,13 @@ export default function DashBoardGeneralData() {
   }, [id]);
   // =========================== UPDATE GENERAL DATA ===========================
   const updateGeneraldata = (id) => {
-    Axios.put(`https://garage-automobile-627012dfc93e.herokuapp.com/dataone/update/${id}`, formData)
+    Axios.put(`http://localhost:3002/dataone/update/${id}`, formData)
     window.location.reload();
   }
 
   // =========================== DELETE GENERAL DATA ===========================
   const deleteGeneralData = (id) => {
-    Axios.delete(`https://garage-automobile-627012dfc93e.herokuapp.com/dataone/delete/${id}`);
+    Axios.delete(`http://localhost:3002/dataone/delete/${id}`);
     window.location.reload();
   }
 

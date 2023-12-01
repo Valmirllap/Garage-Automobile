@@ -22,7 +22,7 @@ export default function DashBoardSmallDetails() {
 
   // =========================== READ SMALL DETAILS ===========================
   useEffect(() => {
-    Axios.get(`https://garage-automobile-627012dfc93e.herokuapp.com/smalldetails/get/${id}`)
+    Axios.get(`http://localhost:3002/smalldetails/get/${id}`)
       .then((response) => {
         setSmallDetails(response.data.smallDetail);
       })
@@ -33,7 +33,7 @@ export default function DashBoardSmallDetails() {
 
   // =========================== UPDATE SMALL DETAILS ===========================
   const updateSmallDetail = (id) => {
-    Axios.put(`https://garage-automobile-627012dfc93e.herokuapp.com/smalldetails/update/${id}`, {
+    Axios.put(`http://localhost:3002/smalldetails/update/${id}`, {
       state: state,
       firstReg: firstReg,
       gearbox: gearBox,
@@ -47,7 +47,7 @@ export default function DashBoardSmallDetails() {
 
   // =========================== DELETE SMALL DETAILS ===========================
   const deleteSmallDetails = (id) => {
-    Axios.delete(`https://garage-automobile-627012dfc93e.herokuapp.com/smalldetails/delete/${id}`);
+    Axios.delete(`http://localhost:3002/smalldetails/delete/${id}`);
     window.location.reload();
   }
 

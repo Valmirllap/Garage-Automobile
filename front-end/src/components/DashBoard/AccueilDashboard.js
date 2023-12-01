@@ -22,7 +22,7 @@ export default function AccueilDashboard() {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     const anonymousName = name.length === 0 ? "anonymous" : name;
-    Axios.post('https://garage-automobile-627012dfc93e.herokuapp.com/api/insert', {
+    Axios.post('http://localhost:3002/api/insert', {
       name: anonymousName,
       message: message,
       rating: rating,
@@ -42,14 +42,14 @@ export default function AccueilDashboard() {
 
   // =========================== READ COMMENTS ===========================
   useEffect(() => {
-    Axios.get('https://garage-automobile-627012dfc93e.herokuapp.com/api/get').then((response) => {
+    Axios.get('http://localhost:3002/api/get').then((response) => {
       setComments(response.data);
     })
   }, [])
 
   // =========================== UPDATE COMMENTS ===========================
   const updateComment = (id) => {
-    Axios.put('https://garage-automobile-627012dfc93e.herokuapp.com/api/update', {
+    Axios.put('http://localhost:3002/api/update', {
       message: updateReview,
       id: id,
     });
@@ -59,7 +59,7 @@ export default function AccueilDashboard() {
 
   // =========================== DELETE COMMENTS ===========================
   const deleteComment = (id) => {
-    Axios.delete(`https://garage-automobile-627012dfc93e.herokuapp.com/api/delete/${id}`);
+    Axios.delete(`http://localhost:3002/api/delete/${id}`);
     window.location.reload();
   }
 
@@ -71,7 +71,7 @@ export default function AccueilDashboard() {
 
   // =========================== Access ADMIN and EMPLOYEE ===========================
   useEffect(() => {
-    Axios.get("https://garage-automobile-627012dfc93e.herokuapp.com/login", { withCredentials: true })
+    Axios.get("http://localhost:3002/login", { withCredentials: true })
       .then((response) => {
         if (response.data.loggedIn === true) {
           setLogged(true);

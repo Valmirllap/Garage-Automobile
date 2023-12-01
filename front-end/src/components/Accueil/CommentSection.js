@@ -13,7 +13,7 @@ export default function CommentSection() {
   const [newComments, setNewComments] = useState([]);
 
   useEffect(() => {
-    Axios.get('https://garage-automobile-627012dfc93e.herokuapp.com/api/get').then((response) => {
+    Axios.get('http://localhost:3002/api/get').then((response) => {
       setComments(response.data.slice(-4));
     })
   }, [])
@@ -21,7 +21,7 @@ export default function CommentSection() {
   const handleCommentSubmit = (e) => {
     const anonymousName = name.length === 0 ? "anonymous" : name;
     e.preventDefault()
-    Axios.post('https://garage-automobile-627012dfc93e.herokuapp.com/api/insert', {
+    Axios.post('http://localhost:3002/api/insert', {
       name: anonymousName,
       message: message,
       rating: rating,

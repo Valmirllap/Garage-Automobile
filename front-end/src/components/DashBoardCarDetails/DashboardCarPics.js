@@ -13,7 +13,7 @@ export default function DashboardCarPics() {
 
   // =========================== READ PICS ===========================
   useEffect(() => {
-    Axios.get(`https://garage-automobile-627012dfc93e.herokuapp.com/carpics/get/${id}`)
+    Axios.get(`http://localhost:3002/carpics/get/${id}`)
       .then((response) => {
         setCarsPictures(response.data.pictures);
       })
@@ -24,7 +24,7 @@ export default function DashboardCarPics() {
 
   // =========================== DELETE PICs ===========================
   const deleteCarPics = (id) => {
-    Axios.delete(`https://garage-automobile-627012dfc93e.herokuapp.com/carpics/delete/${id}`);
+    Axios.delete(`http://localhost:3002/carpics/delete/${id}`);
     window.location.reload();
   }
 

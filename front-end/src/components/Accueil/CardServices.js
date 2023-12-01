@@ -6,7 +6,7 @@ export default function CardServices() {
   const [servicesDB, setServicesDB] = useState([]);
     // ============================== RETRIEVE A SERVICE ==============================
     useEffect(() => {
-      Axios.get('https://garage-automobile-627012dfc93e.herokuapp.com/service/get')
+      Axios.get('http://localhost:3002/service/get')
         .then((response) => {
           setServicesDB(response.data)
         })

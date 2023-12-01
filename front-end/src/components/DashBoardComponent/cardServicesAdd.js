@@ -14,7 +14,7 @@ export default function CardServicesAdd() {
 
   // ============================== RETRIEVE A SERVICE ==============================
   useEffect(() => {
-    Axios.get('https://garage-automobile-627012dfc93e.herokuapp.com/service/get')
+    Axios.get('http://localhost:3002/service/get')
       .then((response) => {
         setServicesDB(response.data)
       })
@@ -22,7 +22,7 @@ export default function CardServicesAdd() {
 
   // ============================== UPDATE A SERVICE ================================
   const updateService = (id) => {
-    Axios.put('https://garage-automobile-627012dfc93e.herokuapp.com/service/update', {
+    Axios.put('http://localhost:3002/service/update', {
       image: updateImage,
       title: updateTitle,
       price: updatePrice,
@@ -33,12 +33,12 @@ export default function CardServicesAdd() {
 
   // ============================== DELETE A SERVICE ================================
   const deleteService = (id) => {
-    Axios.delete(`https://garage-automobile-627012dfc93e.herokuapp.com/service/delete/${id}`);
+    Axios.delete(`http://localhost:3002/service/delete/${id}`);
     window.location.reload();
   }
   // =========================== ACCES TO THE PAGE /DASHBOARD/FOOTER ONLY THE ADMIN ===========================
   useEffect(() => {
-    Axios.get('https://garage-automobile-627012dfc93e.herokuapp.com/login', { withCredentials: true })
+    Axios.get('http://localhost:3002/login', { withCredentials: true })
       .then((response) => {
         if (response.data.loggedIn === true) {
           setLogged(true);

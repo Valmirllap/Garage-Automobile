@@ -14,14 +14,14 @@ export default function FooterDashboard() {
 
   // =========================== READ SCHEDULE ===========================
   useEffect(() => {
-    Axios.get('https://garage-automobile-627012dfc93e.herokuapp.com/get/opening')
+    Axios.get('http://localhost:3002/get/opening')
       .then((response) => {
         setDataDB(response.data);
       })
   }, [])
   // =========================== UPDATE SCHEDULE ===========================
   const updateOpeningTime = (id) => {
-    Axios.put('https://garage-automobile-627012dfc93e.herokuapp.com/update/opening', {
+    Axios.put('http://localhost:3002/update/opening', {
       openingTime: open,
       id: id,
     });
@@ -30,7 +30,7 @@ export default function FooterDashboard() {
 
   // =========================== ACCES TO THE PAGE /DASHBOARD/FOOTER ONLY THE ADMIN ===========================
   useEffect(() => {
-    Axios.get('https://garage-automobile-627012dfc93e.herokuapp.com/login', { withCredentials: true })
+    Axios.get('http://localhost:3002/login', { withCredentials: true })
       .then((response) => {
         if (response.data.loggedIn === true) {
           setLogged(true);

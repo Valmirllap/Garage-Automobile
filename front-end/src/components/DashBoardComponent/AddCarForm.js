@@ -28,7 +28,7 @@ export default function AddCarForm() {
 
   // =========================== CREATE CAR ===========================
   const HandleSubmitCar = () => {
-    Axios.post("https://garage-automobile-627012dfc93e.herokuapp.com/post/carinfo", {
+    Axios.post("http://localhost:3002/post/carinfo", {
       image: urlImg,
       car: alt,
       title: title,
@@ -43,7 +43,7 @@ export default function AddCarForm() {
   }
 // =========================== CREATE PICS ===========================
   const handleSubmitPics = () => {
-    Axios.post("https://garage-automobile-627012dfc93e.herokuapp.com/carpics/insert", {
+    Axios.post("http://localhost:3002/carpics/insert", {
       car_pics_name: carPicsName,
       url_img: urlPics,
     })

@@ -11,7 +11,7 @@ export default function AddServiceForm() {
   // ============================== CREATE A SERVICE ==============================
   const handleSubmitService = () => {
     if (image && title && price) {
-      Axios.post('https://garage-automobile-627012dfc93e.herokuapp.com/service/add', {
+      Axios.post('http://localhost:3002/service/add', {
         image: image,
         title: title,
         price: price,

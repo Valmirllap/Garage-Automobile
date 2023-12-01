@@ -21,7 +21,7 @@ export default function AchatDashboard() {
 
   // =========================== READ CAR ===========================
   useEffect(() => {
-    Axios.get("https://garage-automobile-627012dfc93e.herokuapp.com/get/carinfo")
+    Axios.get("http://localhost:3002/get/carinfo")
       .then((response) => {
         setCarInfo(response.data);
       })
@@ -29,7 +29,7 @@ export default function AchatDashboard() {
 
   // =========================== UPDATE CAR ===========================
   const updateCar = (id) => {
-    Axios.put(`https://garage-automobile-627012dfc93e.herokuapp.com/update/carinfo/${id}`, {
+    Axios.put(`http://localhost:3002/update/carinfo/${id}`, {
       image: urlImg,
       title: title,
       year: year,
@@ -42,13 +42,13 @@ export default function AchatDashboard() {
 
   // =========================== DELETE CAR ===========================
   const deleteCar = (id) => {
-    Axios.delete(`https://garage-automobile-627012dfc93e.herokuapp.com/delete/carinfo/${id}`);
+    Axios.delete(`http://localhost:3002/delete/carinfo/${id}`);
     window.location.reload();
   }
 
   // =========================== ACCES TO THE PAGE /DASHBOARD/ACHAT ===========================
   useEffect(() => {
-    Axios.get("https://garage-automobile-627012dfc93e.herokuapp.com/login", { withCredentials: true })
+    Axios.get("http://localhost:3002/login", { withCredentials: true })
       .then((response) => {
         if (response.data.loggedIn === true) {
           setLogged(true);
